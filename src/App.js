@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Controllers from "./SortingVisualiserApp/controllers/Controllers"
+import SortingVisualiser from "./SortingVisualiserApp/viewer/SortingVisualiser";
+import {Stack} from "@mui/material";
+import {Component} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component{
+    constructor(props) {
+        super(props);
+    }
+
+    sortButtonClicked() {
+        console.log('sort button pressed!');
+    }
+
+    render(){
+        return (
+            <Stack direction="row"
+                   sx={{
+                       display: 'flex',
+                       '& > *': {
+                           m: 5,
+                       }}}>
+                <Controllers sortButtonClicked={() => this.sortButtonClicked}/>
+                <SortingVisualiser/>
+            </Stack>
+        );
+    }
 }
 
-export default App;
+
