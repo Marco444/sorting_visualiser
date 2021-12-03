@@ -52,7 +52,7 @@ export default class Buttons extends Component {
                         }}>
                         <FormControlLabel value="insertionSort" control={<Radio/>} label="Insertion Sort"/>
                         <FormControlLabel value="mergeSort" control={<Radio/>}
-                                          onChange={this.props.mergeSortButtonClicked} label="Merge Sort"/>
+                                          onChange={this.props.bubbleSortButtonClicked} label="Bubble Sort"/>
                         <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"/>
                     </RadioGroup>
                 </FormControl>

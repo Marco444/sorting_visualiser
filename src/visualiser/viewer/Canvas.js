@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {Box} from "@mui/material";
 
-
 // This is the main color of the array bars.
 const PRIMARY_COLOR = '#21e892';
+
 
 
 export default class Canvas extends Component {
@@ -13,7 +13,7 @@ export default class Canvas extends Component {
             <Box sx={{
                 position: 'relative',
                 right: 10,
-                width: 1000,
+                width: 1300,
                 height: 700,
                 backgroundColor: 'wheat',
             }}>
