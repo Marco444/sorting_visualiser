@@ -18,11 +18,11 @@ export default class Canvas extends Component {
                 backgroundColor: 'wheat',
             }}>
                 {this.props.array.map((value, idx) => (
-                    <Box key={idx} name="arrayBar" style={{
+                    <div key={idx} className="arrayBar" style={{
                         width: `${value}px`,
                         height: 20,
                         backgroundColor: PRIMARY_COLOR
-                    }}> </Box>
+                    }}> </div>
                 ))}
             </Box>
 
