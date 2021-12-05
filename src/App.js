@@ -16,9 +16,13 @@ import {newShuffledArray} from "./visualiser/model/utils"
 const DEFAULT_NUMBER_OF_ARRAY_BARS = 10;
 const DEFAULT_ANIMATION_SPEED = 500;
 const DEFAULT_LENGTH_BARS = 1000;
-const SHUFFLE_ANIMATION_SPEED = 30;
+const SHUFFLE_ANIMATION_SPEED = 4;
+const DEFAULT_BARS_HEIGHT = 3;
 
-const SLIDER_MAX = 198;
+const MAX_SLIDER_BARS = 1000;
+
+
+const SLIDER_MAX = 500;
 
 export default class App extends Component {
     constructor(props) {
@@ -29,6 +33,7 @@ export default class App extends Component {
         this.sortingAnimationSpeed = DEFAULT_ANIMATION_SPEED
         this.barsLength = DEFAULT_LENGTH_BARS
         this.barsNumber = DEFAULT_NUMBER_OF_ARRAY_BARS
+        this.barsHeight = DEFAULT_BARS_HEIGHT
     }
 
     componentDidMount() {
@@ -76,7 +81,8 @@ export default class App extends Component {
 
 
     applyAnimationsByClassName(getAnimations, className, speed) {
-        const animations = getAnimations(this.state.array);
+        const [animationsStart, animationsEnd, animationsReset] = getAnimations(this.state.array);
+        const animations = animationsStart.concat(animationsEnd).concat(animationsReset)
 
         for (let index = 0; index < animations.length; index++) {
             const currentBars = document.getElementsByClassName(className);
@@ -94,14 +100,16 @@ export default class App extends Component {
                            m: 5,
                        }
                    }}>
-                <Controllers sortButtonClicked={this.sortButtonClicked.bind(this)}
+                <Controllers sliderSpeedValue={SLIDER_MAX}
+                             maxNumberBars={MAX_SLIDER_BARS}
+                             sortButtonClicked={this.sortButtonClicked.bind(this)}
                              shuffleButtonClicked={this.shuffleButtonClicked.bind(this)}
                              bubbleSortButtonClicked={this.bubbleSortSelected.bind(this)}
                              mergeSortButtonClicked={this.mergeSortSelected.bind(this)}
                              handleSpeedSlider={this.handleSpeedSlider.bind(this)}
                              handlerBarsNumberSlider={this.handleBarsNumberSlider.bind(this)}/>
 
-                <SortingVisualiser array={this.state.array}/>
+                <SortingVisualiser barsHeight={this.barsHeight} array={this.state.array}/>
             </Stack>
         );
     }

@@ -1,0 +1,20 @@
+
+.fade{
+    animation: myFadeToShuffled 1s;
+    background: black;
+}
+
+@keyframes myFadeToShuffled {
+    from {background-color: #21e892;}
+    to {background-color: #ff8eb2;}
+}
+
+.unFade{
+    animation: myFadeToShuffled 1s;
+    background: black;
+}
+
+@keyframes myFadeToShuffled {
+    from {background-color: #ff8eb2;}
+    to {background-color: #21e892;}
+}

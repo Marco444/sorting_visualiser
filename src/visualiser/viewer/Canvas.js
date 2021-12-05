@@ -20,7 +20,7 @@ export default class Canvas extends Component {
                 {this.props.array.map((value, idx) => (
                     <div key={idx} className="arrayBar" style={{
                         width: `${value}px`,
-                        height: 20,
+                        height: `${this.props.barsHeight}px`,
                         backgroundColor: PRIMARY_COLOR
                     }}> </div>
                 ))}

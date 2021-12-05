@@ -5,13 +5,11 @@ import {FormControl, FormControlLabel, Radio, RadioGroup, Slider, Stack, Typogra
 import React, {Component} from "react";
 
 const STACK_WIDTH = 300;
-const SLIDER_MAX = 198;
-const BARS_MAX = 50;
 
 export default class Buttons extends Component {
     render() {
         return (
-            <Stack width={STACK_WIDTH} onClick={this.props.controllerClicked}>
+            <Stack width={STACK_WIDTH} >
                 <ButtonGroup
                     orientation="vertical"
                     aria-label="vertical contained button group"
@@ -74,7 +72,7 @@ export default class Buttons extends Component {
                         fontWeight: 'bold',
 
                     }} gutterBottom> Animation Speed </Typography>
-                    <Slider max={SLIDER_MAX} key={1} sx={{
+                    <Slider max={this.props.sliderSpeedValue} key={1} sx={{
                         marginLeft: 2,
                         marginBottom: 2,
                         width: 265
@@ -91,7 +89,7 @@ export default class Buttons extends Component {
                         fontWeight: 'bold',
 
                     }} gutterBottom> Number bars </Typography>
-                    <Slider max={BARS_MAX} id="sliderBars" sx={{
+                    <Slider max={this.props.maxNumberBars} id="sliderBars" sx={{
                         marginLeft: 2,
                         marginBottom: 2,
                         width: 265

@@ -5,13 +5,15 @@ import {ColorAnimation, Animation} from "../AnimationsEngine";
 
 
 export default function getShuffleAnimations(array) {
-    let animations = []
+    let animationsStart = []
+    let animationEnd = []
+    let animationsReset = []
 
     for (let i = 0; i < array.length - 1; i++) {
-        animations.push(new Animation(ColorAnimation.ShuffleBegin, i, i))
-        animations.push(new Animation(ColorAnimation.ShuffleEnd, i, i))
+        animationsStart.push(new Animation(ColorAnimation.ShuffleBegin, i, i))
+        animationEnd.push(new Animation(ColorAnimation.ShuffleEnd, i, i))
+        animationsReset.push(new Animation(ColorAnimation.ShuffleReset, i, i))
     }
-
-    return animations
+    return [animationsStart, animationEnd, animationsReset]
 
 }
