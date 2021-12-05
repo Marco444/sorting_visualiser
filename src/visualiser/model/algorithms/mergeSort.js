@@ -1,41 +1,63 @@
-import {Animation, ColorAnimation, SwapAnimation} from "../Animations"
+import {Animation, ColorAnimation, CopyAnimation} from "../Animations"
 import {equalArrays} from "../utils";
 
 
-export default function getMergeSortAnimations(array2) {
-    const animations = []
+export default function getMergeSortAnimations(array) {
+    const animations = [];
 
-    const array = array2.map( (a) => a) //IF I DON'T DO THE MAP WE AREN'T COPYING IT
+    if (array.length <= 1) return array;
 
-    console.log(array)
+    const auxiliaryArray = array.slice();
 
-    if (array.length === 0) return animations;
+    mergeSort(array, 0, array.length - 1, auxiliaryArray, animations);
 
-    //We pass the array without a wrapper, because we can access the array
-    //(pass by value of objects and arrays is reference copy)
-    mergeSort(array, animations, 0, array.length)
-
-    console.log(array2.sort((a, b) => a > b))
-    console.log(array)
-    console.log(equalArrays(array2.sort((a, b) => a > b), array))
     return animations;
 }
 
-//DIVIDE PART OF DIVIDE AND CONQUER
-function mergeSort(wrapper, animations, left, right) {
-    if(right > left) {
-        const middle = Math.floor(left + (right - left) / 2)
-        console.log(middle)
-        mergeSort(wrapper, animations, left, middle)
-        mergeSort(wrapper, animations,middle + 1, right)
-        merge(wrapper, animations, left, middle, right)
-    }
+function mergeSort(mainArray, left, right, auxiliaryArray, animations,) {
+    if (left === right) return;
+    const middle = Math.floor((left + right) / 2);
+    mergeSort(auxiliaryArray, left, middle, mainArray, animations);
+    mergeSort(auxiliaryArray, middle + 1, right, mainArray, animations);
+    merge(mainArray, left, middle, right, auxiliaryArray, animations);
 }
 
-//MERGE/CONQUER PART OF DIVIDE AND CONQUER
-function merge(wrapper, animations, left, middle, right) {
+function merge(mainArray, left, middle, right, auxiliaryArray, animations) {
+    let k = left;
+    let i = left;
+    let j = middle + 1;
 
+    while (i <= middle && j <= right) {
+        if (auxiliaryArray[i] <= auxiliaryArray[j]) {
 
+            animations.push(new Animation(ColorAnimation.SelectionBegin, k, i))
+            animations.push(new Animation(ColorAnimation.SelectionEnd, k, i))
+            animations.push(new Animation(CopyAnimation.begin, k, i))
 
+            mainArray[k++] = auxiliaryArray[i++];
+        } else {
 
+            animations.push(new Animation(ColorAnimation.SelectionBegin, k, j))
+            animations.push(new Animation(ColorAnimation.SelectionEnd, k, j))
+            animations.push(new Animation(CopyAnimation.begin, k, j))
+
+            mainArray[k++] = auxiliaryArray[j++];
+        }
+    }
+
+    while (i <= middle) {
+
+        animations.push(new Animation(ColorAnimation.SelectionBegin, k, i))
+        animations.push(new Animation(ColorAnimation.SelectionEnd, k, i))
+        animations.push(new Animation(CopyAnimation.begin, k, i))
+        mainArray[k++] = auxiliaryArray[i++];
+    }
+
+    while (j <= right) {
+
+        animations.push(new Animation(ColorAnimation.SelectionBegin, k, j))
+        animations.push(new Animation(ColorAnimation.SelectionEnd, k, j))
+        animations.push(new Animation(CopyAnimation.begin, k, j))
+        mainArray[k++] = auxiliaryArray[j++];
+    }
 }

@@ -15,6 +15,14 @@ export class SwapAnimation {
     }
 }
 
+export class CopyAnimation {
+    static begin = new CopyAnimation();
+
+    apply(current, next) {
+        current.style.width = next.style.width
+    }
+}
+
 export class ColorAnimation {
 
     static ComparisonBegin = new ColorAnimation(COMPARING_COLOR);

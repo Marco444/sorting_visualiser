@@ -26,7 +26,5 @@ export default function getBubbleSortAnimations(array) {
         }
     }
 
-    console.log(array)
-
     return animations;
 }
