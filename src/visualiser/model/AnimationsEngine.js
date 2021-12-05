@@ -8,6 +8,7 @@ export class SwapAnimation {
     static begin = new SwapAnimation();
     static end;
 
+
     apply(current, next) {
         const auxWidth = next.style.width
         next.style.width = current.style.width
@@ -15,8 +16,7 @@ export class SwapAnimation {
     }
 }
 
-export class MergeAnimation {
-
+export class CopyAnimation {
 
     constructor(newWidth) {
         this.newWidth = newWidth
@@ -24,8 +24,6 @@ export class MergeAnimation {
 
     apply(current) {
         current.style.width = `${this.newWidth}px`
-        current.style.backgoundcolor = SELECTION_COLOR
-        console.log('drawes')
     }
 }
 
@@ -37,9 +35,13 @@ export class ColorAnimation {
     static SelectionBegin = new ColorAnimation(SELECTION_COLOR);
     static SelectionEnd = new ColorAnimation(PRIMARY_COLOR);
 
+    static ShuffleBegin = new ColorAnimation(SHUFFLE_COLOR);
+    static ShuffleEnd = new ColorAnimation(PRIMARY_COLOR);
+
     constructor(color) {
         this.color = color
     }
+
 
     apply(current, next) {
         current.style.backgroundColor = this.color

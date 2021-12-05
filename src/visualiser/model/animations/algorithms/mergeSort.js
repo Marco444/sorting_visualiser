@@ -1,5 +1,5 @@
-import {Animation, ColorAnimation, CopyAnimation, MergeAnimation} from "../Animations"
-import {equalArrays} from "../utils";
+import {Animation, ColorAnimation, CopyAnimation} from "../../AnimationsEngine"
+import {equalArrays} from "../../utils";
 
 
 export default function getMergeSortAnimations(array) {
@@ -54,5 +54,5 @@ function merge(mainArray, left, middle, right, auxiliaryArray, animations) {
 function animation(i, k, animations, auxiliaryArray) {
     animations.push(new Animation(ColorAnimation.SelectionBegin, i, k))
     animations.push(new Animation(ColorAnimation.SelectionEnd, i, k))
-    animations.push(new Animation(new MergeAnimation(auxiliaryArray[i]), k, i))
+    animations.push(new Animation(new CopyAnimation(auxiliaryArray[i]), k, i))
 }

@@ -5,29 +5,30 @@ import {Component} from "react";
 import Controllers from "./visualiser/controllers/Controllers"
 import SortingVisualiser from "./visualiser/viewer/Canvas";
 
-import getMergeSortAnimations from "./visualiser/model/algorithms/mergeSort"
-import getBubbleSortAnimations from "./visualiser/model/algorithms/bubbleSort";
+import getMergeSortAnimations from "./visualiser/model/animations/algorithms/mergeSort"
+import getBubbleSortAnimations from "./visualiser/model/animations/algorithms/bubbleSort";
+import getShuffleAnimations from "./visualiser/model/animations/shuffleAnimation";
+
+
 import {newShuffledArray} from "./visualiser/model/utils"
 
 // Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 10;
-const ANIMATION_SPEED = 500;
-const LENGTH_BARS = 1000;
-
-const SELECTION_COLOR = '#a275ff';
-const PRIMARY_COLOR = '#21e892';
-const SHUFFLE_COLOR = '#ff8eb2';
-const COMPARING_COLOR = 'rgba(123,152,248,0.98)';
+const DEFAULT_NUMBER_OF_ARRAY_BARS = 10;
+const DEFAULT_ANIMATION_SPEED = 500;
+const DEFAULT_LENGTH_BARS = 1000;
+const SHUFFLE_ANIMATION_SPEED = 30;
 
 const SLIDER_MAX = 198;
 
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.sortingAlgorithm = () => this.callSortingAlgorithm(getBubbleSortAnimations)
-        this.state = {array: []};
-        this.animateSort = true
-        this.animationSpeed = ANIMATION_SPEED
+        this.currentSortingAlgorithm =
+            () => this.applyAnimationsByClassName(getBubbleSortAnimations, this.state.barsClassName, this.sortingAnimationSpeed)
+        this.state = {array: [], barsClassName: 'arrayBar'};
+        this.sortingAnimationSpeed = DEFAULT_ANIMATION_SPEED
+        this.barsLength = DEFAULT_LENGTH_BARS
+        this.barsNumber = DEFAULT_NUMBER_OF_ARRAY_BARS
     }
 
     componentDidMount() {
@@ -35,57 +36,52 @@ export default class App extends Component {
     }
 
     shuffle() {
-        this.setState(() => ({
-            array: newShuffledArray(NUMBER_OF_ARRAY_BARS, 0, LENGTH_BARS)
-        }));
+        this.setState(() => ({array: newShuffledArray(this.barsNumber, 0, this.barsLength)}));
     }
 
+    //Controllers Handlers
     sortButtonClicked() {
-        console.log('sort button pressed!');
-        this.sortingAlgorithm();
+        this.currentSortingAlgorithm();
     }
 
     shuffleButtonClicked() {
-        console.log('shuffle button pressed!');
-        this.shuffle()
-        this.shuffleAnimation();
+        this.shuffle();
+        //Puede ser qu me haga el setState despues y no justo cuando yo quiero, tengo que delayer esto aca abajo
+        setTimeout(() => this.applyAnimationsByClassName(
+                        getShuffleAnimations, this.state.barsClassName, SHUFFLE_ANIMATION_SPEED), 100);
     }
-
-    shuffleAnimation() {
-        for (let i = 1; i <= NUMBER_OF_ARRAY_BARS; i++) {
-            const bars = document.getElementsByClassName("arrayBar");
-            setTimeout(() => {
-                bars[i - 1].style.backgroundColor = PRIMARY_COLOR
-                if(i === NUMBER_OF_ARRAY_BARS) return;
-                bars[i].style.backgroundColor = SHUFFLE_COLOR
-            }, i * 10);
-        }
-
-    }
-
-    bubbleSortButtonClicked() {
-        this.sortingAlgorithm = () => this.callSortingAlgorithm(getBubbleSortAnimations);
-    }
-
-    mergeSortButtonClicked() {
-        this.sortingAlgorithm = () => this.callSortingAlgorithm(getMergeSortAnimations);
-    }
-
-
-    callSortingAlgorithm(getAnimations) {
-        const animations = getAnimations(this.state.array);
-
-        for (let index = 0; index < animations.length; index++) {
-            const currentBars = document.getElementsByClassName("arrayBar");
-            setTimeout( () => animations[index].applyTo(currentBars),
-                index * this.animationSpeed);
-        }
-    }
-
 
     handleSpeedSlider(event, value) {
         console.log(value)
-        this.animationSpeed = SLIDER_MAX - value
+        this.sortingAnimationSpeed = SLIDER_MAX - value
+    }
+
+    handleBarsNumberSlider(event, value) {
+        this.barsNumber = value
+        this.shuffleButtonClicked()
+    }
+
+    //Animations
+    bubbleSortSelected() {
+        this.currentSortingAlgorithm =
+            () => this.applyAnimationsByClassName(getBubbleSortAnimations, this.state.barsClassName,
+                this.sortingAnimationSpeed);
+    }
+
+    mergeSortSelected() {
+        this.currentSortingAlgorithm =
+            () => this.applyAnimationsByClassName(getMergeSortAnimations, this.state.barsClassName,
+                this.sortingAnimationSpeed);
+    }
+
+
+    applyAnimationsByClassName(getAnimations, className, speed) {
+        const animations = getAnimations(this.state.array);
+
+        for (let index = 0; index < animations.length; index++) {
+            const currentBars = document.getElementsByClassName(className);
+            setTimeout( () => animations[index].applyTo(currentBars), index * speed);
+        }
     }
 
 
@@ -100,9 +96,10 @@ export default class App extends Component {
                    }}>
                 <Controllers sortButtonClicked={this.sortButtonClicked.bind(this)}
                              shuffleButtonClicked={this.shuffleButtonClicked.bind(this)}
-                             bubbleSortButtonClicked={this.bubbleSortButtonClicked.bind(this)}
-                             mergeSortButtonClicked={this.mergeSortButtonClicked.bind(this)}
-                             handleSpeedSlider={this.handleSpeedSlider.bind(this)}/>
+                             bubbleSortButtonClicked={this.bubbleSortSelected.bind(this)}
+                             mergeSortButtonClicked={this.mergeSortSelected.bind(this)}
+                             handleSpeedSlider={this.handleSpeedSlider.bind(this)}
+                             handlerBarsNumberSlider={this.handleBarsNumberSlider.bind(this)}/>
 
                 <SortingVisualiser array={this.state.array}/>
             </Stack>

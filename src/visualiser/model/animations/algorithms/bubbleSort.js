@@ -1,4 +1,4 @@
-import {Animation, ColorAnimation, SwapAnimation} from "../Animations";
+import {Animation, ColorAnimation, SwapAnimation} from "../../AnimationsEngine";
 
 export default function getBubbleSortAnimations(array) {
     const animations = []

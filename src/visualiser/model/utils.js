@@ -1,7 +1,7 @@
 
 export function newShuffledArray(length, minValue, maxValue) {
     const array = [];
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i <= length; i++) {
         array.push(randomIntFromInterval(minValue, maxValue));
     }
     return array;

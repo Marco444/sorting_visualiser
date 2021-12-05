@@ -6,11 +6,12 @@ import React, {Component} from "react";
 
 const STACK_WIDTH = 300;
 const SLIDER_MAX = 198;
+const BARS_MAX = 50;
 
 export default class Buttons extends Component {
     render() {
         return (
-            <Stack width={STACK_WIDTH}>
+            <Stack width={STACK_WIDTH} onClick={this.props.controllerClicked}>
                 <ButtonGroup
                     orientation="vertical"
                     aria-label="vertical contained button group"
@@ -33,10 +34,10 @@ export default class Buttons extends Component {
                             }} onClick={this.props.shuffleButtonClicked}> SHUFFLE </Button>
                 </ButtonGroup>
                 <FormControl sx={{
-                                marginTop: 5,
-                                fontWeight: 'bold',
-                                color: 'white',
-                                }} component="fieldset">
+                    marginTop: 5,
+                    fontWeight: 'bold',
+                    color: 'white',
+                }} component="fieldset">
 
                     <RadioGroup
                         aria-label="gender"
@@ -47,30 +48,55 @@ export default class Buttons extends Component {
                             color: 'white',
                             width: 275,
                             paddingLeft: 2,
-                            paddingTop: 1,
+                            paddingTop: 3,
+                            paddingBottom: 2,
                             fontWeight: 'bold',
                         }}>
+                        <Typography id="animation-slider" sx={{
+                            paddingLeft: 2,
+                            fontWeight: 'bold',
+                        }} gutterBottom> Algorithms </Typography>
+
                         <FormControlLabel value="insertionSort" control={<Radio/>} label="Merge Sort"
-                                          onChange={this.props.mergeSortButtonClicked}/>
+                                          onChange={this.props.mergeSortButtonClicked} defaultChecked={true}/>
                         <FormControlLabel value="mergeSort" control={<Radio/>}
                                           onChange={this.props.bubbleSortButtonClicked} label="Bubble Sort"/>
                         <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"/>
                     </RadioGroup>
-                    <Stack sx={{
-                            backgroundColor: 'rgba(57,92,183,0.98)',
-                            marginTop: 5,}}>
-                    <Typography id="input-slider" sx={{
+                </FormControl>
+                <Stack sx={{
+                    backgroundColor: 'rgba(57,92,183,0.98)',
+                    marginTop: 5,
+                    color: "white"
+                }}>
+                    <Typography id="animation-slider" sx={{
                         padding: 2,
                         fontWeight: 'bold',
 
                     }} gutterBottom> Animation Speed </Typography>
-                    <Slider  max={SLIDER_MAX} sx={{
+                    <Slider max={SLIDER_MAX} key={1} sx={{
                         marginLeft: 2,
                         marginBottom: 2,
                         width: 265
-                    }}  onChange={this.props.handleSpeedSlider} />
-                    </Stack>
-                </FormControl>
+                    }} onChange={this.props.handleSpeedSlider}/>
+                </Stack>
+
+                <Stack sx={{
+                    backgroundColor: 'rgba(57,92,183,0.98)',
+                    marginTop: 5,
+                    color: "white"
+                }}>
+                    <Typography id="bars-slider" sx={{
+                        padding: 2,
+                        fontWeight: 'bold',
+
+                    }} gutterBottom> Number bars </Typography>
+                    <Slider max={BARS_MAX} id="sliderBars" sx={{
+                        marginLeft: 2,
+                        marginBottom: 2,
+                        width: 265
+                    }} onChange={this.props.handlerBarsNumberSlider}/>
+                </Stack>
             </Stack>
         );
     }
