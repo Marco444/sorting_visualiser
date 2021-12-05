@@ -57,7 +57,7 @@ export default class Buttons extends Component {
                         <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"/>
                     </RadioGroup>
                     <Stack sx={{
-                            backgroundColor: 'rgba(0,43,162,0.98)',
+                            backgroundColor: 'rgba(57,92,183,0.98)',
                             marginTop: 5,}}>
                     <Typography id="input-slider" sx={{
                         padding: 2,

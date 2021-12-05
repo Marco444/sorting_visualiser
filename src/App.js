@@ -17,7 +17,7 @@ const LENGTH_BARS = 1000;
 const SELECTION_COLOR = '#a275ff';
 const PRIMARY_COLOR = '#21e892';
 const SHUFFLE_COLOR = '#ff8eb2';
-const COMPARING_COLOR = 'rgba(83,126,255,0.98)';
+const COMPARING_COLOR = 'rgba(123,152,248,0.98)';
 
 const SLIDER_MAX = 198;
 
@@ -42,16 +42,11 @@ export default class App extends Component {
 
     sortButtonClicked() {
         console.log('sort button pressed!');
-        //this.animateSort =  1
         this.sortingAlgorithm();
     }
 
     shuffleButtonClicked() {
         console.log('shuffle button pressed!');
-
-        //When we click shuffle were animating we compute it all at once
-       // this.animateSort = 0
-
         this.shuffle()
         this.shuffleAnimation();
     }

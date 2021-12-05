@@ -15,11 +15,17 @@ export class SwapAnimation {
     }
 }
 
-export class CopyAnimation {
-    static begin = new CopyAnimation();
+export class MergeAnimation {
 
-    apply(current, next) {
-        current.style.width = next.style.width
+
+    constructor(newWidth) {
+        this.newWidth = newWidth
+    }
+
+    apply(current) {
+        current.style.width = `${this.newWidth}px`
+        current.style.backgoundcolor = SELECTION_COLOR
+        console.log('drawes')
     }
 }
 

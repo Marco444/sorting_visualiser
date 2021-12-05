@@ -1,9 +1,10 @@
-import {Animation, ColorAnimation, CopyAnimation} from "../Animations"
+import {Animation, ColorAnimation, CopyAnimation, MergeAnimation} from "../Animations"
 import {equalArrays} from "../utils";
 
 
 export default function getMergeSortAnimations(array) {
     const animations = [];
+    console.log('merge sort animations')
 
     if (array.length <= 1) return array;
 
@@ -30,34 +31,28 @@ function merge(mainArray, left, middle, right, auxiliaryArray, animations) {
     while (i <= middle && j <= right) {
         if (auxiliaryArray[i] <= auxiliaryArray[j]) {
 
-            animations.push(new Animation(ColorAnimation.SelectionBegin, k, i))
-            animations.push(new Animation(ColorAnimation.SelectionEnd, k, i))
-            animations.push(new Animation(CopyAnimation.begin, k, i))
-
+            animation(i, k, animations, auxiliaryArray)
             mainArray[k++] = auxiliaryArray[i++];
+
         } else {
-
-            animations.push(new Animation(ColorAnimation.SelectionBegin, k, j))
-            animations.push(new Animation(ColorAnimation.SelectionEnd, k, j))
-            animations.push(new Animation(CopyAnimation.begin, k, j))
-
+            animation(j, k, animations, auxiliaryArray)
             mainArray[k++] = auxiliaryArray[j++];
         }
     }
 
     while (i <= middle) {
-
-        animations.push(new Animation(ColorAnimation.SelectionBegin, k, i))
-        animations.push(new Animation(ColorAnimation.SelectionEnd, k, i))
-        animations.push(new Animation(CopyAnimation.begin, k, i))
+        animation(i, k, animations, auxiliaryArray)
         mainArray[k++] = auxiliaryArray[i++];
     }
 
     while (j <= right) {
-
-        animations.push(new Animation(ColorAnimation.SelectionBegin, k, j))
-        animations.push(new Animation(ColorAnimation.SelectionEnd, k, j))
-        animations.push(new Animation(CopyAnimation.begin, k, j))
+        animation(j, k, animations, auxiliaryArray)
         mainArray[k++] = auxiliaryArray[j++];
     }
+}
+
+function animation(i, k, animations, auxiliaryArray) {
+    animations.push(new Animation(ColorAnimation.SelectionBegin, i, k))
+    animations.push(new Animation(ColorAnimation.SelectionEnd, i, k))
+    animations.push(new Animation(new MergeAnimation(auxiliaryArray[i]), k, i))
 }
