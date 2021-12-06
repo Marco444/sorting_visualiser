@@ -1,25 +1,27 @@
 
 import {Stack} from "@mui/material";
 import {Component} from "react";
+import { useMeasure } from "react-use";
 
-import Controllers from "./visualiser/controllers/Controllers"
-import SortingVisualiser from "./visualiser/viewer/Canvas";
+import {Controllers} from "./controllers/Controllers"
+import SortingVisualiser from "./viewer/Canvas";
+import InfoBox from "./viewer/InfoBox"
 
-import getMergeSortAnimations from "./visualiser/model/animations/algorithms/mergeSort"
-import getBubbleSortAnimations from "./visualiser/model/animations/algorithms/bubbleSort";
-import getShuffleAnimations from "./visualiser/model/animations/shuffleAnimation";
+import getMergeSortAnimations from "./model/animations/algorithms/mergeSort"
+import getBubbleSortAnimations from "./model/animations/algorithms/bubbleSort";
+import getShuffleAnimations from "./model/animations/shuffleAnimation";
 
 
-import {newShuffledArray} from "./visualiser/model/utils"
+import {newShuffledArray} from "./model/utils"
 
 // Change this value for the number of bars (value) in the array.
 const DEFAULT_NUMBER_OF_ARRAY_BARS = 10;
 const DEFAULT_ANIMATION_SPEED = 500;
 const DEFAULT_LENGTH_BARS = 1000;
 const SHUFFLE_ANIMATION_SPEED = 4;
-const DEFAULT_BARS_HEIGHT = 3;
+const DEFAULT_BARS_HEIGHT = 10;
 
-const MAX_SLIDER_BARS = 1000;
+const MAX_SLIDER_BARS = 100;
 
 
 const SLIDER_MAX = 500;
@@ -31,17 +33,20 @@ export default class App extends Component {
             () => this.applyAnimationsByClassName(getBubbleSortAnimations, this.state.barsClassName, this.sortingAnimationSpeed)
         this.state = {array: [], barsClassName: 'arrayBar'};
         this.sortingAnimationSpeed = DEFAULT_ANIMATION_SPEED
-        this.barsLength = DEFAULT_LENGTH_BARS
+        this.canvasWidth = this.props.width / 1.1
+        this.barsLength = this.canvasWidth * 0.60
         this.barsNumber = DEFAULT_NUMBER_OF_ARRAY_BARS
         this.barsHeight = DEFAULT_BARS_HEIGHT
     }
 
     componentDidMount() {
         this.shuffle()
+
     }
 
     shuffle() {
         this.setState(() => ({array: newShuffledArray(this.barsNumber, 0, this.barsLength)}));
+        console.log(this.props.ref)
     }
 
     //Controllers Handlers
@@ -53,7 +58,7 @@ export default class App extends Component {
         this.shuffle();
         //Puede ser qu me haga el setState despues y no justo cuando yo quiero, tengo que delayer esto aca abajo
         setTimeout(() => this.applyAnimationsByClassName(
-                        getShuffleAnimations, this.state.barsClassName, SHUFFLE_ANIMATION_SPEED), 100);
+                        getShuffleAnimations, this.state.barsClassName, SHUFFLE_ANIMATION_SPEED), 200);
     }
 
     handleSpeedSlider(event, value) {
@@ -81,8 +86,7 @@ export default class App extends Component {
 
 
     applyAnimationsByClassName(getAnimations, className, speed) {
-        const [animationsStart, animationsEnd, animationsReset] = getAnimations(this.state.array);
-        const animations = animationsStart.concat(animationsEnd).concat(animationsReset)
+        const animations = getAnimations(this.state.array);
 
         for (let index = 0; index < animations.length; index++) {
             const currentBars = document.getElementsByClassName(className);
@@ -107,9 +111,14 @@ export default class App extends Component {
                              bubbleSortButtonClicked={this.bubbleSortSelected.bind(this)}
                              mergeSortButtonClicked={this.mergeSortSelected.bind(this)}
                              handleSpeedSlider={this.handleSpeedSlider.bind(this)}
-                             handlerBarsNumberSlider={this.handleBarsNumberSlider.bind(this)}/>
+                             handlerBarsNumberSlider={this.handleBarsNumberSlider.bind(this)}
+                             width={this.props.width} height={this.props.height}/>
 
-                <SortingVisualiser barsHeight={this.barsHeight} array={this.state.array}/>
+                <SortingVisualiser barsHeight={this.barsHeight} array={this.state.array}
+                            width={this.props.width} height={this.props.height} canvasWidth={this.canvasWidth}/>
+
+                <InfoBox bubbleSortSelected={this.bubbleSortSelected.bind(this)}
+                            width={this.props.width} height={this.props.height}/>
             </Stack>
         );
     }

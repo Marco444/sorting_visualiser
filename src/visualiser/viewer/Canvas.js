@@ -12,10 +12,11 @@ export default class Canvas extends Component {
         return (
             <Box sx={{
                 position: 'relative',
-                right: 10,
-                width: 1300,
-                height: 700,
+                height: this.props.height / 1.1,
+                width: this.props.canvasWidth, //canvasWidth has to do with max length bars
                 backgroundColor: 'wheat',
+                marginLeft: 2,
+                marginRight: 2
             }}>
                 {this.props.array.map((value, idx) => (
                     <div key={idx} className="arrayBar" style={{

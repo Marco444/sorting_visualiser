@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
-    "@mui/material": "^5.2.2"
+    "@mui/material": "^5.2.2",
+    "react-use": "^17.3.1"
   }
 }

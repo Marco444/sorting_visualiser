@@ -1,7 +1,6 @@
 
 // Change this value for the number of bars (value) in the array.
-import {ColorAnimation, Animation} from "../AnimationsEngine";
-
+import {ColorAnimation, Animation, AnimationReset} from "../AnimationsEngine";
 
 
 export default function getShuffleAnimations(array) {
@@ -9,11 +8,11 @@ export default function getShuffleAnimations(array) {
     let animationEnd = []
     let animationsReset = []
 
-    for (let i = 0; i < array.length - 1; i++) {
+    for (let i = 0; i < array.length; i++) {
         animationsStart.push(new Animation(ColorAnimation.ShuffleBegin, i, i))
         animationEnd.push(new Animation(ColorAnimation.ShuffleEnd, i, i))
-        animationsReset.push(new Animation(ColorAnimation.ShuffleReset, i, i))
+        animationsReset.push(new Animation(AnimationReset.Shuffle, i, i))
     }
-    return [animationsStart, animationEnd, animationsReset]
+    return animationsStart.concat(animationEnd).concat(animationsReset)
 
 }

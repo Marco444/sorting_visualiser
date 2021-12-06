@@ -1,7 +1,6 @@
 
 .fade{
     animation: myFadeToShuffled 1s;
-    background: black;
 }
 
 @keyframes myFadeToShuffled {
@@ -9,12 +8,66 @@
     to {background-color: #ff8eb2;}
 }
 
+
+
+.selectFade{
+    animation: myFadeSelected 3s;
+}
+
+@keyframes myFadeSelected {
+    from {background-color: #21e892;}
+    to {background-color: #a275ff;}
+}
+
+.sorted {
+    background: #ff518a;
+}
+
+.sortedFade{
+    animation: myFadeSorted 1s;
+}
+
+@keyframes myFadeSorted {
+    from {background-color: #21e892;}
+    to {background-color: #ff518a;}
+}
+
+/* TRANSITIONS BACK TO PRIMARY COLOR*/
+
 .unFade{
     animation: myFadeToShuffled 1s;
-    background: black;
 }
 
 @keyframes myFadeToShuffled {
     from {background-color: #ff8eb2;}
     to {background-color: #21e892;}
 }
+
+.selectUnFade{
+    animation: myUnFadeSelected 1s;
+}
+
+@keyframes myUnFadeSelected {
+    from {background-color: #a275ff;}
+    to {background-color: #21e892;}
+}
+
+.sortedUnFade{
+    animation: myUnFadeSorted 3s;
+}
+
+@keyframes myUnFadeSorted {
+    from {background-color: #ff518a;}
+    to {background-color: #21e892;}
+}
+
+/*
+.resizeFade {
+    animation: myResizeFade 5s;
+}
+
+@keyframes myResizeFade {
+    from{width: var(--currentWidth); }
+    to{width: var(--newWidth)}
+}
+*/

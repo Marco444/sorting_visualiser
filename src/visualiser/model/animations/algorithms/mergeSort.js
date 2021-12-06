@@ -1,4 +1,4 @@
-import {Animation, ColorAnimation, CopyAnimation} from "../../AnimationsEngine"
+import {Animation, AnimationReset, ColorAnimation, CopyAnimation} from "../../AnimationsEngine"
 import {equalArrays} from "../../utils";
 
 
@@ -28,31 +28,37 @@ function merge(mainArray, left, middle, right, auxiliaryArray, animations) {
     let i = left;
     let j = middle + 1;
 
+    let resetAnimations = []
+
     while (i <= middle && j <= right) {
         if (auxiliaryArray[i] <= auxiliaryArray[j]) {
 
-            animation(i, k, animations, auxiliaryArray)
+            animation(i, k, animations, auxiliaryArray, resetAnimations)
             mainArray[k++] = auxiliaryArray[i++];
 
         } else {
-            animation(j, k, animations, auxiliaryArray)
+            animation(j, k, animations, auxiliaryArray, resetAnimations)
             mainArray[k++] = auxiliaryArray[j++];
         }
     }
 
     while (i <= middle) {
-        animation(i, k, animations, auxiliaryArray)
+        animation(i, k, animations, auxiliaryArray, resetAnimations)
         mainArray[k++] = auxiliaryArray[i++];
     }
 
     while (j <= right) {
-        animation(j, k, animations, auxiliaryArray)
+        animation(j, k, animations, auxiliaryArray, resetAnimations)
         mainArray[k++] = auxiliaryArray[j++];
     }
+
+
+    animations.push(...resetAnimations)
 }
 
-function animation(i, k, animations, auxiliaryArray) {
-    animations.push(new Animation(ColorAnimation.SelectionBegin, i, k))
-    animations.push(new Animation(ColorAnimation.SelectionEnd, i, k))
-    animations.push(new Animation(new CopyAnimation(auxiliaryArray[i]), k, i))
+function animation(i, k, setAnimations, auxiliaryArray, resetAnimations) {
+    setAnimations.push(new Animation(ColorAnimation.SelectBegin, i, k))
+    setAnimations.push(new Animation(ColorAnimation.SelectEnd, i, k))
+    setAnimations.push(new Animation(new CopyAnimation(auxiliaryArray[i]), k, i))
+    resetAnimations.push(new Animation(AnimationReset.Select, i, k))
 }
