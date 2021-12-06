@@ -26,7 +26,6 @@ export default class Canvas extends Component {
                     }}> </div>
                 ))}
             </Box>
-
         );
     }
 }

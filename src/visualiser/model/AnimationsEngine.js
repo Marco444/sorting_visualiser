@@ -36,7 +36,7 @@ export class AnimationReset {
 
     static Shuffle = new AnimationReset('fade', 'unFade')
     static Select = new AnimationReset('selectFade', 'selectUnFade')
-    static Sorted = new AnimationReset('sortedFade')
+    static Sorted = new AnimationReset('sortedFade', 'sortedUnFade')
 
     constructor(className1, className2) {
         this.className1 = className1
@@ -60,7 +60,7 @@ export class ColorAnimation {
     static SelectEnd = new ColorAnimation('selectUnFade');
 
     static SortedBegin = new ColorAnimation('sortedFade');
-    static SortedEnd = new ColorAnimation('sorted');
+    static SortedEnd = new ColorAnimation('sortedUnFade');
 
     constructor(animationClassName) {
         this.animationClassName = animationClassName

@@ -6,7 +6,6 @@ import React, {Component} from "react";
 import {useMeasure} from "react-use";
 
 
-
 export const Controllers = (props) => {
     const stackWidth = props.width / 8;
     const stackHeight = props.height;
@@ -22,7 +21,7 @@ export const Controllers = (props) => {
                 orientation="vertical"
                 aria-label="vertical contained button group"
                 variant="contained">
-                <Button key="one"
+                <Button key="one" disabled={props.isBusy}
                         sx={{
                             bgcolor: '#a275ff',
                             color: 'white',
@@ -30,7 +29,7 @@ export const Controllers = (props) => {
                             paddingLeft: 2,
                             paddingTop: 1,
                         }} onClick={props.sortButtonClicked}> SORT </Button>
-                <Button key="two"
+                <Button key="two" disabled={props.isBusy}
                         sx={{
                             bgcolor: '#ff8eb2',
                             color: 'white',
@@ -38,6 +37,14 @@ export const Controllers = (props) => {
                             paddingLeft: 2,
                             paddingTop: 1,
                         }} onClick={props.shuffleButtonClicked}> SHUFFLE </Button>
+                { props.isBusy && <Button key="two"
+                        sx={{
+                            bgcolor: '#ff8181',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            paddingLeft: 2,
+                            paddingTop: 1,
+                        }} onClick={props.stopAnimation}> STOP </Button> }
             </ButtonGroup>
             <FormControl sx={{
                 marginTop: 5,
@@ -64,10 +71,13 @@ export const Controllers = (props) => {
                     }} gutterBottom> Algorithms </Typography>
 
                     <FormControlLabel value="insertionSort" control={<Radio/>} label="Merge Sort"
-                                      onChange={props.mergeSortButtonClicked} defaultChecked={true}/>
+                                      onChange={props.mergeSortButtonClicked} defaultChecked={true}
+                                      disabled={props.isBusy}/>
                     <FormControlLabel value="mergeSort" control={<Radio/>}
-                                      onChange={props.bubbleSortButtonClicked} label="Bubble Sort"/>
-                    <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"/>
+                                      onChange={props.bubbleSortButtonClicked} label="Bubble Sort"
+                                      disabled={props.isBusy}/>
+                    <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"
+                                      disabled={props.isBusy}/>
                 </RadioGroup>
             </FormControl>
             <Stack sx={{
@@ -84,7 +94,7 @@ export const Controllers = (props) => {
                     marginLeft: 2,
                     marginBottom: 2,
                     width: sliderWidth
-                }} onChange={props.handleSpeedSlider}/>
+                }} onChange={props.handleSpeedSlider} disabled={props.isBusy}/>
             </Stack>
 
             <Stack sx={{
@@ -101,7 +111,7 @@ export const Controllers = (props) => {
                     marginLeft: 2,
                     marginBottom: 2,
                     width: sliderWidth
-                }} onChange={props.handlerBarsNumberSlider}/>
+                }} onChange={props.handlerBarsNumberSlider} disabled={props.isBusy}/>
             </Stack>
         </Stack>
     );
