@@ -1,15 +1,19 @@
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
-import {FormControl, FormControlLabel, Radio, RadioGroup, Slider, Stack, Typography} from "@mui/material";
+import {Box, FormControl, FormControlLabel, Radio, RadioGroup, Slider, Stack, Typography} from "@mui/material";
 import React, {Component} from "react";
 import {useMeasure} from "react-use";
+import {InformationBox} from "./InformationBox";
 
 
 export const Controllers = (props) => {
     const stackWidth = props.width / 8;
     const stackHeight = props.height;
     const sliderWidth = stackWidth - 30;
+    let info;
+
+
 
 
     return (
@@ -46,10 +50,10 @@ export const Controllers = (props) => {
                             fontWeight: 'bold',
                             paddingLeft: 2,
                             paddingTop: 1,
-                        }} onClick={props.stopAnimation}> STOP </Button> }
+                        }} onClick={props.stopAnimation}> RESET </Button> }
             </ButtonGroup>
             <FormControl sx={{
-                marginTop: 5,
+                marginTop: 1,
                 fontWeight: 'bold',
                 color: 'white',
                 width: stackWidth,
@@ -63,28 +67,31 @@ export const Controllers = (props) => {
                         bgcolor: '#21e892',
                         color: 'white',
                         paddingLeft: 2,
-                        paddingTop: 3,
+                        paddingTop: 2,
                         paddingBottom: 2,
                         fontWeight: 'bold',
                     }}>
                     <Typography id="animation-slider" sx={{
-                        paddingLeft: 2,
                         fontWeight: 'bold',
                     }} gutterBottom> Algorithms </Typography>
-
+                    <Stack sx={{fontWeight: 'bold'}}>
                     <FormControlLabel value="insertionSort" control={<Radio/>} label="Merge Sort"
-                                      onChange={props.mergeSortButtonClicked} defaultChecked={true}
-                                      disabled={props.isBusy}/>
-                    <FormControlLabel value="mergeSort" control={<Radio/>}
-                                      onChange={props.bubbleSortButtonClicked} label="Bubble Sort"
-                                      disabled={props.isBusy}/>
+                                      onChange={props.mergeSortButtonClicked} disabled={props.isBusy} sx={{fontWeight: 'bold'}}/>
+
+                    <FormControlLabel value="mergeSort" control={<Radio/>}  label="Bubble Sort"
+                                      onChange={props.bubbleSortButtonClicked} disabled={props.isBusy}/>
+
                     <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"
-                                      disabled={props.isBusy}/>
+                                      onChange={props.quickSortButtonClicked} disabled={props.isBusy}/>
+
+                    <FormControlLabel value="radixSort" control={<Radio/>} label="Radix Sort"
+                                      onChange={props.radixSortButtonClicked} disabled={props.isBusy}/>
+                    </Stack>
                 </RadioGroup>
             </FormControl>
             <Stack sx={{
                 backgroundColor: 'rgba(57,92,183,0.98)',
-                marginTop: 5,
+                marginTop: 1,
                 color: "white"
             }}>
                 <Typography id="animation-slider" sx={{
@@ -101,7 +108,7 @@ export const Controllers = (props) => {
 
             <Stack sx={{
                 backgroundColor: 'rgba(57,92,183,0.98)',
-                marginTop: 5,
+                marginTop: 1,
                 color: "white"
             }}>
                 <Typography id="bars-slider" sx={{
@@ -115,6 +122,7 @@ export const Controllers = (props) => {
                     width: sliderWidth
                 }} onChange={props.handlerBarsNumberSlider} disabled={props.isBusy}/>
             </Stack>
+            <InformationBox selected={props.selected} width={sliderWidth} />
         </Stack>
     );
 }
