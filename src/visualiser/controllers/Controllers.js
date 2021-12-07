@@ -11,7 +11,9 @@ export const Controllers = (props) => {
     const stackHeight = props.height;
     const sliderWidth = stackWidth - 30;
 
+
     return (
+
         <Stack  sx={{
             marginRight: 1,
             width: stackWidth,

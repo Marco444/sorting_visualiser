@@ -4,7 +4,7 @@ import {Component} from "react";
 
 import {Controllers} from "./controllers/Controllers"
 import SortingVisualiser from "./viewer/Canvas";
-import InfoBox from "./viewer/InfoBox"
+import {InfoBox} from "./viewer/InfoBox"
 
 import getMergeSortAnimations from "./model/animations/algorithms/mergeSort"
 import getBubbleSortAnimations from "./model/animations/algorithms/bubbleSort";
@@ -36,28 +36,30 @@ export default class App extends Component {
         this.barsNumber = DEFAULT_NUMBER_OF_ARRAY_BARS
         this.barsHeight = DEFAULT_BARS_HEIGHT
         this.stopAnimation = false
+        this.isBusy = false
     }
 
     componentDidMount() {
         this.setState(() => ({array: newShuffledArray(this.barsNumber, 0, this.barsLength)}));
-        this.busy = false
     }
 
     //Controllers Handlers
     sortButtonClicked() {
-        this.currentSortingAlgorithm();
+        setTimeout( () => {
+            this.setState(() => ({isBusy: true}))
+            this.currentSortingAlgorithm();
+        }, 100)
     }
 
     shuffleButtonClicked() {
         //Puede ser qu me haga el setState despues y no justo cuando yo quiero, tengo que delayer esto aca abajo
-        setTimeout( () => {
-            this.setState(() => ({array: newShuffledArray(this.barsNumber, 0, this.barsLength)}));
+       setTimeout( () => {
+            this.setState(() => ({array: newShuffledArray(this.barsNumber, 0, this.barsLength), isBusy: true}));
             this.applyAnimationsByClassName(getShuffleAnimations, SHUFFLE_ANIMATION_SPEED)
         }, 100);
     }
 
     handleSpeedSlider(event, value) {
-        console.log(value)
         this.sortingAnimationSpeed = SLIDER_MAX - value + 3
     }
 
@@ -67,38 +69,32 @@ export default class App extends Component {
     }
 
     handleStopAnimation() {
-        this.stopAnimation = true
+       this.stopAnimation = true
     }
 
     //Animations
     bubbleSortSelected() {
-        this.currentSortingAlgorithm =
-            () => this.applyAnimationsByClassName(getBubbleSortAnimations, this.sortingAnimationSpeed);
+        this.currentSortingAlgorithm = () => this.applyAnimationsByClassName(getBubbleSortAnimations, this.sortingAnimationSpeed);
     }
 
     mergeSortSelected() {
-        this.currentSortingAlgorithm =
-            () => this.applyAnimationsByClassName(getMergeSortAnimations, this.sortingAnimationSpeed);
+        this.currentSortingAlgorithm = () => this.applyAnimationsByClassName(getMergeSortAnimations, this.sortingAnimationSpeed);
     }
 
 
     applyAnimationsByClassName(getAnimations, speed) {
 
-        this.setState(() => ({isBusy: true}))
+        //If i do setState here then the whole animation gets passed at once?
 
         const animations = getAnimations(this.state.array);
 
         for (let index = 0; index < animations.length; index++) {
+            const currentBars = document.getElementsByClassName('arrayBar');
             setTimeout(() => {
-                    if(!this.stopAnimation) {
-                        const currentBars = document.getElementsByClassName('arrayBar');
-                        animations[index].applyTo(currentBars)
-                        if (index === animations.length - 1) this.setState(() => ({isBusy: false}));
-                    } else {
-                        this.setState( () => ({isBusy : false}))
-                    }
-                }, index * speed);
-            this.stopAnimation = false
+                    animations[index].applyTo(currentBars)
+                    if (index === animations.length - 1) this.setState(() => ({isBusy: false}))
+                }
+                , index * speed);
         }
     }
 
@@ -125,8 +121,6 @@ export default class App extends Component {
                 <SortingVisualiser barsHeight={this.barsHeight} array={this.state.array}
                             width={this.props.width} height={this.props.height} canvasWidth={this.canvasWidth}/>
 
-                <InfoBox bubbleSortSelected={this.bubbleSortSelected.bind(this)}
-                            width={this.props.width} height={this.props.height}/>
             </Stack>
         );
     }

@@ -2,9 +2,9 @@ import {Box, Typography} from "@mui/material";
 import React, {Component} from "react";
 import {AlgorithmInfo} from "./AlgorithmInfo";
 
-export default class infoBox extends Component{
-    render() {
-        return <Box sx={{
+export const InfoBox = (props) => {
+    return (
+        <Box sx={{
             marginTop: 5,
             marginLeft: 2,
             width: this.props.width / 7,
@@ -15,9 +15,9 @@ export default class infoBox extends Component{
                 paddingLeft: 2,
                 fontWeight: 'bold',
             }} gutterBottom>
-            <AlgorithmInfo title="Bubble Sort" body="Bla bla bla bla"/>
+                {props.algorithm === "bubbleSort" && <AlgorithmInfo title="Bubble Sort" body="Bla bla bla bla"/>}
 
             </Typography>
         </Box>
-    }
+    );
 }
