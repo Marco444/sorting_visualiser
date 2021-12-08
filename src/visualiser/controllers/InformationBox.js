@@ -32,7 +32,7 @@ export const InformationBox = ({selected, width}) => {
         <Typography>
             Quick sort is an algorithm with O(N*logN) complexity,
             it works by picking a pivot element and then sorting
-            the subsequent arrays created
+            the subsequent arrays created.
         </Typography>
 
     return (
