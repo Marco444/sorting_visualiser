@@ -13,6 +13,7 @@ import getShuffleAnimations from "./model/animations/shuffleAnimation";
 
 import {newShuffledArray} from "./model/utils"
 import {InformationBox} from "./controllers/InformationBox";
+import getSelectedAnimation from "./model/animations/selectedAnimation";
 
 // Change this value for the number of bars (value) in the array.
 const DEFAULT_NUMBER_OF_ARRAY_BARS = 10;
@@ -30,13 +31,15 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.currentSortingAlgorithm = () => this.applyAnimationsByClassName(getBubbleSortAnimations, this.sortingAnimationSpeed)
-        this.state = {array: [], isBusy: false, stopAnimation: false, selected: "none"};
+        this.state = {array: [], isBusy: false, stopAnimation:
+                false, selected: "none", barsLength: DEFAULT_NUMBER_OF_ARRAY_BARS, barsHeight: DEFAULT_BARS_HEIGHT,
+                barsNumber: DEFAULT_NUMBER_OF_ARRAY_BARS};
         this.sortingAnimationSpeed = DEFAULT_ANIMATION_SPEED
         this.canvasWidth = this.props.width / 1.1
         this.canvasHeight = this.props.height / 1.1
         this.barsLength = this.canvasWidth * 0.8
         this.barsNumber = DEFAULT_NUMBER_OF_ARRAY_BARS
-        this.barsHeight =  DEFAULT_BARS_HEIGHT
+        this.barsHeight =  DEFAULT_BARS_HEIGHT // (this.barsNumber * 0.05)
         this.stopAnimation = false
         this.isBusy = false
     }
@@ -56,22 +59,30 @@ export default class App extends Component {
     shuffleButtonClicked() {
         //Puede ser qu me haga el setState despues y no justo cuando yo quiero, tengo que delayer esto aca abajo
        setTimeout( () => {
-            this.setState(() => ({array: newShuffledArray(this.barsNumber, 0, this.barsLength), isBusy: true}));
+            this.setState(() => ({array: newShuffledArray(this.state.barsNumber, 0, this.barsLength), isBusy: true}));
             this.applyAnimationsByClassName(getShuffleAnimations, SHUFFLE_ANIMATION_SPEED)
         }, 100);
     }
 
-    handleStopAnimation() {
-       window.location.reload();
-    }
-
     handleSpeedSlider(event, value) {
-        this.sortingAnimationSpeed = SLIDER_MAX - value + 3
+        setTimeout ( () => {
+            this.setState(() => ({isBusy: true}))
+            this.sortingAnimationSpeed = SLIDER_MAX - value + 3
+            this.applyAnimationsByClassName(getSelectedAnimation, SHUFFLE_ANIMATION_SPEED)
+        }, 100);
     }
 
     handleBarsNumberSlider(event, value) {
-        this.barsNumber = value
-        this.shuffleButtonClicked()
+        setTimeout( () => {
+            this.setState(() => ({barsNumber: value, array: newShuffledArray(this.state.barsNumber, 0, this.barsLength), isBusy: true}));
+            this.barsNumber = value
+            this.applyAnimationsByClassName(getSelectedAnimation, SHUFFLE_ANIMATION_SPEED)
+        }, 100);
+    }
+
+
+    handleStopAnimation() {
+        window.location.reload();
     }
 
 

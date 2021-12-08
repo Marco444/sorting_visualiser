@@ -19,10 +19,6 @@
     to {background-color: #a275ff;}
 }
 
-.sorted {
-    background: #ff518a;
-}
-
 .sortedFade{
     animation: myFadeSorted 1s;
 }
@@ -32,6 +28,14 @@
     to {background-color: #ff518a;}
 }
 
+.modifiedFade{
+    animation: myFadeModified 1s;
+}
+
+@keyframes myFadeModified {
+    from {background-color: #21e892;}
+    to {background-color: #234ebe;}
+}
 /* TRANSITIONS BACK TO PRIMARY COLOR*/
 
 .unFade{
@@ -61,6 +65,14 @@
     to {background-color: #21e892;}
 }
 
+.modifiedUnFade{
+    animation: myUnFadeModified 1s;
+}
+
+@keyframes myUnFadeModified {
+    from {background-color: #234ebe;}
+    to {background-color: #21e892;}
+}
 /*
 .resizeFade {
     animation: myResizeFade 5s;

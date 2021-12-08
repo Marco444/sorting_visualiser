@@ -1,6 +1,6 @@
 import {Animation, AnimationReset, ColorAnimation, CopyAnimation} from "../../AnimationsEngine"
 import {equalArrays} from "../../utils";
-
+import getSortedAnimation from "../sortedAnimation";
 
 export default function getMergeSortAnimations(array) {
     const animations = [];
@@ -12,8 +12,7 @@ export default function getMergeSortAnimations(array) {
 
     mergeSort(array, 0, array.length - 1, auxiliaryArray, animations);
 
-    sortedAnimation(animations, array)
-    return animations;
+    return animations.concat(getSortedAnimation(array));
 }
 
 function mergeSort(mainArray, left, right, auxiliaryArray, animations,) {
@@ -62,17 +61,4 @@ function animation(i, k, setAnimations, auxiliaryArray, resetAnimations) {
     setAnimations.push(new Animation(ColorAnimation.SelectEnd, i, k))
     setAnimations.push(new Animation(new CopyAnimation(auxiliaryArray[i]), k, i))
     resetAnimations.push(new Animation(AnimationReset.Select, i, k))
-}
-
-function sortedAnimation(animations, array) {
-
-    let resetAnimations = []
-
-    for(let i = 0; i < array.length; i++) {
-        animations.push(new Animation(ColorAnimation.SortedBegin, i, i))
-        animations.push(new Animation(ColorAnimation.SortedEnd, i, i))
-        resetAnimations.push(new Animation(AnimationReset.Sorted, i, i ))
-    }
-
-    animations.push(...resetAnimations)
 }

@@ -1,5 +1,5 @@
-import {fade, selectFade, sortedFade} from "./AnimationsEngine.css"
-import {unFade, selectUnFade, sortedUnFade, sorted} from "./AnimationsEngine.css"
+import {fade, selectFade, sortedFade, modifiedFade} from "./AnimationsEngine.css"
+import {unFade, selectUnFade, sortedUnFade, sorted, modifiedUnFade} from "./AnimationsEngine.css"
 
 //ANIMATIONS
 export const SELECTION_COLOR = '#a275ff';
@@ -37,6 +37,7 @@ export class AnimationReset {
     static Shuffle = new AnimationReset('fade', 'unFade')
     static Select = new AnimationReset('selectFade', 'selectUnFade')
     static Sorted = new AnimationReset('sortedFade', 'sortedUnFade')
+    static Modified = new AnimationReset('modifiedFade', 'modifiedUnFade')
 
     constructor(className1, className2) {
         this.className1 = className1
@@ -61,6 +62,9 @@ export class ColorAnimation {
 
     static SortedBegin = new ColorAnimation('sortedFade');
     static SortedEnd = new ColorAnimation('sortedUnFade');
+
+    static ModifiedBegin = new ColorAnimation('modifiedFade');
+    static ModifiedEnd = new ColorAnimation('modifiedUnFade');
 
     constructor(animationClassName) {
         this.animationClassName = animationClassName
