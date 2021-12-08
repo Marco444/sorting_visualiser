@@ -1,3 +1,3 @@
 # Sorting Visualiser
 
-This project was designed on React js
+This project was designed in React js
