@@ -1,5 +1,6 @@
 import {Box, Stack, Typography} from "@mui/material";
 import React from "react";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 export const InformationBox = ({selected, width}) => {
 
@@ -44,13 +45,20 @@ export const InformationBox = ({selected, width}) => {
             marginTop: 1,
             color: "white"
         }}>
-            <Typography id="infog" sx={{
+            <Box id="infog" sx={{
                 fontWeight: 'bold',
-            }} gutterBottom> Information </Typography>
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                paddingBottom: 1
+            }} gutterBottom> Information
+            <HelpOutlineIcon sx={{paddingLeft: 1}}/>
+            </Box>
             {selected === "bubbleSort" && bubbleSortInfo}
             {selected === "mergeSort" && mergeSortInfo}
             {selected === "quickSort" && quickSortInfo}
             {selected === "radixSort" && radixSortInfo}
+
         </Box>
         }
         </Stack>

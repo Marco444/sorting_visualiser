@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {Box} from "@mui/material";
 
 // This is the main color of the array bars.
-const PRIMARY_COLOR = '#21e892';
-
+const PRIMARY_COLOR = '#47118f';
+const CANVAS_COLOR = '#ffb4a1'
 
 
 export default class Canvas extends Component {
@@ -14,7 +14,7 @@ export default class Canvas extends Component {
                 position: 'relative',
                 height: this.props.height / 1.1,
                 width: this.props.canvasWidth, //canvasWidth has to do with max length bars
-                backgroundColor: 'wheat',
+                backgroundColor: CANVAS_COLOR,
                 marginLeft: 2,
                 marginRight: 2
             }}>

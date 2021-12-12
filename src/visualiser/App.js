@@ -1,44 +1,37 @@
 
-import {Stack, Typography} from "@mui/material";
+import {Stack} from "@mui/material";
 import {Component} from "react";
 
 import {Controllers} from "./controllers/Controllers"
 import SortingVisualiser from "./viewer/Canvas";
 
-import getRadixSortAnimations from "./model/animations/algorithms/radixSort";
-import getQuickSortAnimations from "./model/animations/algorithms/quickSort";
-import getMergeSortAnimations from "./model/animations/algorithms/mergeSort"
-import getBubbleSortAnimations from "./model/animations/algorithms/bubbleSort";
-import getShuffleAnimations from "./model/animations/shuffleAnimation";
+import getRadixSortAnimations from "./model/algorithms/radixSort";
+import getQuickSortAnimations from "./model/algorithms/quickSort";
+import getMergeSortAnimations from "./model/algorithms/mergeSort"
+import getBubbleSortAnimations from "./model/algorithms/bubbleSort";
 
 import {newShuffledArray} from "./model/utils"
-import {InformationBox} from "./controllers/InformationBox";
-import getSelectedAnimation from "./model/animations/selectedAnimation";
+import {getShuffleAnimations, getSelectedAnimations} from "./model/animations/AnimationsEngine";
 
 // Change this value for the number of bars (value) in the array.
 const DEFAULT_NUMBER_OF_ARRAY_BARS = 10;
-const DEFAULT_ANIMATION_SPEED = 500;
-const DEFAULT_LENGTH_BARS = 1000;
+const DEFAULT_ANIMATION_SPEED = 100;
 const SHUFFLE_ANIMATION_SPEED = 4;
 const DEFAULT_BARS_HEIGHT = 10;
-
-const MAX_SLIDER_BARS = 100;
-
-
 const SLIDER_MAX = 500;
 
 export default class App extends Component {
     constructor(props) {
         super(props);
         this.currentSortingAlgorithm = () => this.applyAnimationsByClassName(getBubbleSortAnimations, this.sortingAnimationSpeed)
-        this.state = {array: [], isBusy: false, stopAnimation:
-                false, selected: "none", barsLength: DEFAULT_NUMBER_OF_ARRAY_BARS, barsHeight: DEFAULT_BARS_HEIGHT,
+        this.state = {array: [], isBusy: false, stopAnimation: false, mounted : true,
+                    selected: "none", barsLength: DEFAULT_NUMBER_OF_ARRAY_BARS, barsHeight: DEFAULT_BARS_HEIGHT,
                 barsNumber: DEFAULT_NUMBER_OF_ARRAY_BARS};
         this.sortingAnimationSpeed = DEFAULT_ANIMATION_SPEED
         this.canvasWidth = this.props.width / 1.1
         this.canvasHeight = this.props.height / 1.1
         this.barsLength = this.canvasWidth * 0.8
-        this.barsNumber = DEFAULT_NUMBER_OF_ARRAY_BARS
+        this.barsNumber = DEFAULT_NUMBER_OF_ARRAY_BARS * 2
         this.barsHeight =  DEFAULT_BARS_HEIGHT // (this.barsNumber * 0.05)
         this.stopAnimation = false
         this.isBusy = false
@@ -68,15 +61,15 @@ export default class App extends Component {
         setTimeout ( () => {
             this.setState(() => ({isBusy: true}))
             this.sortingAnimationSpeed = SLIDER_MAX - value + 3
-            this.applyAnimationsByClassName(getSelectedAnimation, SHUFFLE_ANIMATION_SPEED)
+            this.applyAnimationsByClassName(getSelectedAnimations, SHUFFLE_ANIMATION_SPEED)
         }, 100);
     }
 
     handleBarsNumberSlider(event, value) {
         setTimeout( () => {
-            this.setState(() => ({barsNumber: value, array: newShuffledArray(this.state.barsNumber, 0, this.barsLength), isBusy: true}));
             this.barsNumber = value
-            this.applyAnimationsByClassName(getSelectedAnimation, SHUFFLE_ANIMATION_SPEED)
+            this.setState(() => ({barsNumber: value, array: newShuffledArray(this.barsNumber, 0, this.barsLength), isBusy: true}));
+            this.applyAnimationsByClassName(getSelectedAnimations, SHUFFLE_ANIMATION_SPEED)
         }, 100);
     }
 
@@ -149,7 +142,6 @@ export default class App extends Component {
 
                 <SortingVisualiser barsHeight={this.barsHeight} array={this.state.array}
                             width={this.props.width} height={this.props.height} canvasWidth={this.canvasWidth}/>
-
             </Stack>
 
         );

@@ -4,8 +4,8 @@
 }
 
 @keyframes myFadeToShuffled {
-    from {background-color: #21e892;}
-    to {background-color: #ff8eb2;}
+    from {background-color: #47118f;}
+    to {background-color: #ff518a;}
 }
 
 
@@ -15,8 +15,8 @@
 }
 
 @keyframes myFadeSelected {
-    from {background-color: #21e892;}
-    to {background-color: #a275ff;}
+    from {background-color: #47118f;}
+    to {background-color: #21e892;}
 }
 
 .sortedFade{
@@ -24,7 +24,7 @@
 }
 
 @keyframes myFadeSorted {
-    from {background-color: #21e892;}
+    from {background-color: #47118f;}
     to {background-color: #ff518a;}
 }
 
@@ -33,8 +33,8 @@
 }
 
 @keyframes myFadeModified {
-    from {background-color: #21e892;}
-    to {background-color: #234ebe;}
+    from {background-color: #47118f;}
+    to {background-color: #21e892;}
 }
 /* TRANSITIONS BACK TO PRIMARY COLOR*/
 
@@ -43,8 +43,8 @@
 }
 
 @keyframes myFadeToShuffled {
-    from {background-color: #ff8eb2;}
-    to {background-color: #21e892;}
+    from {background-color: #ff518a;}
+    to {background-color: #47118f;}
 }
 
 .selectUnFade{
@@ -52,8 +52,8 @@
 }
 
 @keyframes myUnFadeSelected {
-    from {background-color: #a275ff;}
-    to {background-color: #21e892;}
+    from {background-color: #21e892;}
+    to {background-color: #47118f;}
 }
 
 .sortedUnFade{
@@ -62,7 +62,7 @@
 
 @keyframes myUnFadeSorted {
     from {background-color: #ff518a;}
-    to {background-color: #21e892;}
+    to {background-color: #47118f;}
 }
 
 .modifiedUnFade{
@@ -70,8 +70,8 @@
 }
 
 @keyframes myUnFadeModified {
-    from {background-color: #234ebe;}
-    to {background-color: #21e892;}
+    from {background-color: #21e892;}
+    to {background-color: #47118f;}
 }
 /*
 .resizeFade {
