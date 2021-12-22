@@ -1,5 +1,4 @@
-import {equalArrays} from "../utils";
-import {addCopyAnimation, addSwapAnimation} from "../animations/AnimationsEngine";
+import {addSwapAnimation} from "../animations/AnimationsEngine";
 import {getSortedAnimations} from "../animations/AnimationsEngine";
 
 export default function getQuickSortAnimations(array){
@@ -28,7 +27,7 @@ function partition(animations, array, left, right) {
         if(array[j] < pivot){
             i++;
 
-            addSwapAnimation(i, j, animations, array, resetAnimations)
+            addSwapAnimation(i, j, animations, resetAnimations)
 
             let aux = array[i]
             array[i] = array[j]
@@ -36,7 +35,7 @@ function partition(animations, array, left, right) {
         }
     }
 
-    addSwapAnimation(i + 1, right, animations, array, resetAnimations)
+    addSwapAnimation(i + 1, right, animations, resetAnimations)
 
     let aux = array[i + 1]
     array[i + 1] = array[right]

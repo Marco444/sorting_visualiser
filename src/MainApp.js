@@ -1,7 +1,7 @@
 import { useWindowSize} from "react-use";
-import App from "./visualiser/App";
 import {useState} from "react";
-import {WelcomeGuide} from "./visualiser/viewer/Welcome";
+import {WelcomeGuide} from "./visualiser/components/modals/Welcome";
+import {App} from "./App";
 
 export const MainApp = () => {
     const {height, width} = useWindowSize();
@@ -10,7 +10,8 @@ export const MainApp = () => {
     return(
         <>
             <WelcomeGuide display={welcomeShow} close={() => closeWelcome( () => false)} width={width} height={height}/>
-            <App width={width} height={height} />
+            <App width={width} height={height} canvasHeight={height * 0.8} canvasWidth={width * 0.8}
+                 stackWidth={width * 0.15} stackHeight={height * 0.8}/>
         </>
     )
 

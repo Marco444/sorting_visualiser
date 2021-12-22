@@ -6,7 +6,7 @@ export const SortButton = ({isBusy, sortButtonClicked}) => {
    return (
        <Button key="one" disabled={isBusy}
                sx={{
-                   bgcolor: '#8222f8',
+                   bgcolor: '#234ebe',
                    color: 'white',
                    fontWeight: 'bold',
                    paddingLeft: 2,

@@ -2,7 +2,8 @@ import {Box, Slider, Stack} from "@mui/material";
 import FormatLineSpacingIcon from "@mui/icons-material/FormatLineSpacing";
 import React from "react";
 
-export const SliderNumberBars = ({maxNumberBars, sliderWidth, isBusy, handlerBarsNumberSlider}) => {
+export const SliderNumberBars = ({maxNumberBars, minNumberBars, defaultNumberBars,
+                                 sliderWidth, isBusy, handlerBarsNumberSlider}) => {
    return (
        <Stack sx={{
            backgroundColor: 'rgba(57,92,183,0.98)',
@@ -19,11 +20,11 @@ export const SliderNumberBars = ({maxNumberBars, sliderWidth, isBusy, handlerBar
            }} gutterBottom> Number of bars
                <FormatLineSpacingIcon sx={{paddingLeft: 1}} />
            </Box>
-           <Slider max={maxNumberBars} min={maxNumberBars / 2}
-                   defaultValue={maxNumberBars / 2} id="sliderBars" sx={{
+           <Slider max={maxNumberBars} min={minNumberBars}
+                   defaultValue={defaultNumberBars} id="sliderBars" sx={{
                marginLeft: 2,
                marginBottom: 2,
-               width: sliderWidth
+               width: sliderWidth * 0.825
            }} onChange={handlerBarsNumberSlider} disabled={isBusy}/>
        </Stack>
    );

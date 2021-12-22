@@ -3,7 +3,7 @@ import {Box} from "@mui/material";
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = '#47118f';
-const CANVAS_COLOR = '#ffb4a1'
+const CANVAS_COLOR = '#ffc5b6'
 
 
 export default class Canvas extends Component {

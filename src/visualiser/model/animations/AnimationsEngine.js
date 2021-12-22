@@ -1,12 +1,3 @@
-import {fade, selectFade, sortedFade, modifiedFade} from "./AnimationsEngine.css"
-import {unFade, selectUnFade, sortedUnFade, sorted, modifiedUnFade} from "./AnimationsEngine.css"
-import {colors} from "@mui/material";
-
-//ANIMATIONS
-export const SELECTION_COLOR = '#a275ff';
-export const PRIMARY_COLOR = '#21e892';
-export const SHUFFLE_COLOR = '#ff8eb2';
-export const COMPARING_COLOR = 'rgba(83,126,255,0.98)';
 
 class SwapAnimation {
     static begin = new SwapAnimation();
@@ -30,47 +21,34 @@ class CopyAnimation {
     }
 }
 
-class AnimationReset {
 
-    static Shuffle = new AnimationReset('fade', 'unFade')
-    static Select = new AnimationReset('selectFade', 'selectUnFade')
-    static Sorted = new AnimationReset('sortedFade', 'sortedUnFade')
-    static Modified = new AnimationReset('modifiedFade', 'modifiedUnFade')
+const defaultBarColor = "#47118f"
+const algorithmSelectedColor = "#ffb4a1"
+const selectedColor = "#21e892"
+const sortedColor = "#e73068"
 
-    constructor(className1, className2) {
-        this.className1 = className1
-        this.className2 = className2
+class AnimationType {
+
+    static AlgorithmSelection = new AnimationType(800, algorithmSelectedColor, defaultBarColor)
+    static SliderSelection = new AnimationType(800, selectedColor, defaultBarColor)
+    static Sorted = new AnimationType(800, sortedColor, defaultBarColor)
+    static Shuffle = new AnimationType(800, sortedColor, defaultBarColor)
+
+    constructor(duration, color, defaultColor) {
+        this.duration = duration
+        this.color = color
+        this.defaultColor = defaultColor
     }
+
 
     apply(current, next) {
-        current.classList.remove(this.className1)
-        current.classList.remove(this.className2)
-        next.classList.remove(this.className1)
-        next.classList.remove(this.className2)
-    }
-}
+        current.animate(
+            {backgroundColor: [this.color, this.defaultColor]}
+            , this.duration)
 
-class ColorAnimation {
-
-    static ShuffleBegin = new ColorAnimation('fade');
-    static ShuffleEnd = new ColorAnimation('unFade');
-
-    static SelectBegin = new ColorAnimation('selectFade');
-    static SelectEnd = new ColorAnimation('selectUnFade');
-
-    static SortedBegin = new ColorAnimation('sortedFade');
-    static SortedEnd = new ColorAnimation('sortedUnFade');
-
-    static ModifiedBegin = new ColorAnimation('modifiedFade');
-    static ModifiedEnd = new ColorAnimation('modifiedUnFade');
-
-    constructor(animationClassName) {
-        this.animationClassName = animationClassName
-    }
-
-    apply(current, next) {
-        next.classList.add(this.animationClassName)
-        current.classList.add(this.animationClassName)
+        next.animate(
+            {backgroundColor: [this.color, this.defaultColor]}
+            , this.duration)
     }
 }
 
@@ -82,49 +60,44 @@ class Animation {
         this.j = j;
     }
 
-    //Returns 1 or 0 depending whether the next animation needs to wait for it
     applyTo(array) {
         this.type.apply(array[this.i], array[this.j])
     }
 
 }
 
-function addAnimation(i, j, resetAnimations, setAnimations) {
-    setAnimations.push(new Animation(ColorAnimation.SelectBegin, i, j))
-    setAnimations.push(new Animation(ColorAnimation.SelectEnd, i, j))
-    resetAnimations.push(new Animation(AnimationReset.Select, i, j))
-}
 
-function animateAllBarsWith(array, beginAnimation, endAnimation, resetAnimation) {
-    let animationsSet = [], animationsReset = []
+function animateBarsWith(array, animation) {
+    let animationsSet = []
 
-    for(let i = 0; i < array.length; i++) {
-        animationsSet.push(new Animation(beginAnimation, i, i))
-        animationsSet.push(new Animation(endAnimation, i, i))
-        animationsReset.push(new Animation(resetAnimation, i, i ))
-    }
+    for(let i = 0; i < array.length; i++)
+        animationsSet.push(new Animation(animation, i, i))
 
-    return animationsSet.concat(animationsReset)
+    return animationsSet
 }
 
 export function getSortedAnimations(array) {
-   return animateAllBarsWith(array, ColorAnimation.SortedBegin, ColorAnimation.SortedEnd, AnimationReset.Sorted)
+   return animateBarsWith(array, AnimationType.Sorted)
 }
 
 export function getShuffleAnimations(array) {
-  return animateAllBarsWith(array, ColorAnimation.ShuffleBegin, ColorAnimation.ShuffleEnd, AnimationReset.Shuffle)
+  return animateBarsWith(array, AnimationType.Shuffle)
 }
 
 export function getSelectedAnimations(array) {
-   return animateAllBarsWith(array, ColorAnimation.SelectBegin, ColorAnimation.SelectEnd, AnimationReset.Select)
+   return animateBarsWith(array, AnimationType.SliderSelection)
 }
 
-export function addSwapAnimation(i, j, setAnimations, resetAnimations) {
-    addAnimation(i, j, resetAnimations, setAnimations)
+export function getAlgorithmSelectionAnimation(array) {
+    return animateBarsWith(array, AnimationType.AlgorithmSelection)
+}
+
+export function addSwapAnimation(i, j, setAnimations) {
+    setAnimations.push(new Animation(AnimationType.SliderSelection, i, j))
     setAnimations.push(new Animation(SwapAnimation.begin, i, j))
 }
 
-export function addCopyAnimation(i, j, setAnimations, auxiliaryArray, resetAnimations) {
-    addAnimation(i, j, resetAnimations, setAnimations)
+export function addCopyAnimation(i, j, setAnimations, auxiliaryArray) {
+    setAnimations.push(new Animation(AnimationType.SliderSelection, i, j))
     setAnimations.push(new Animation(new CopyAnimation(auxiliaryArray[i]), j))
 }
