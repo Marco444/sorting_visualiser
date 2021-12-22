@@ -19,7 +19,6 @@ function quickSort(animations, array, left, right){
 
 function partition(animations, array, left, right) {
 
-    let resetAnimations = []
     let pivot = array[right]
     let i = left - 1
 
@@ -27,7 +26,7 @@ function partition(animations, array, left, right) {
         if(array[j] < pivot){
             i++;
 
-            addSwapAnimation(i, j, animations, resetAnimations)
+            addSwapAnimation(i, j, animations)
 
             let aux = array[i]
             array[i] = array[j]
@@ -35,13 +34,12 @@ function partition(animations, array, left, right) {
         }
     }
 
-    addSwapAnimation(i + 1, right, animations, resetAnimations)
+    addSwapAnimation(i + 1, right, animations)
 
     let aux = array[i + 1]
     array[i + 1] = array[right]
     array[right] = aux
 
-    animations.push(...resetAnimations)
 
     return i + 1
 }

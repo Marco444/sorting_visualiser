@@ -17,7 +17,6 @@ function countSort(array, exp, animations)
 {
     const output = new Array(array.length); // output array
     const count = []
-    const resetAnimations = [];
 
     // Store count of occurrences in count[]
     for (let i = 0; i < array.length; i++)
@@ -37,9 +36,8 @@ function countSort(array, exp, animations)
     // Copy the output array to arr[], so that arr[] now
     // contains sorted numbers according to current digit
     for (let i = 0; i < array.length; i++) {
-        addCopyAnimation(i, i, animations, output, resetAnimations)
+        addCopyAnimation(i, i, animations, output)
         array[i] = output[i];
     }
 
-    animations.push(...resetAnimations)
 }

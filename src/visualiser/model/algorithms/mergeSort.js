@@ -27,30 +27,29 @@ function merge(mainArray, left, middle, right, auxiliaryArray, animations) {
     let i = left;
     let j = middle + 1;
 
-    let resetAnimations = []
 
     while (i <= middle && j <= right) {
         if (auxiliaryArray[i] <= auxiliaryArray[j]) {
 
-            addCopyAnimation(i, k, animations, auxiliaryArray, resetAnimations)
+            addCopyAnimation(i, k, animations, auxiliaryArray)
             mainArray[k++] = auxiliaryArray[i++];
 
         } else {
-            addCopyAnimation(j, k, animations, auxiliaryArray, resetAnimations)
+            addCopyAnimation(j, k, animations, auxiliaryArray)
             mainArray[k++] = auxiliaryArray[j++];
         }
     }
 
     while (i <= middle) {
-        addCopyAnimation(i, k, animations, auxiliaryArray, resetAnimations)
+        addCopyAnimation(i, k, animations, auxiliaryArray)
         mainArray[k++] = auxiliaryArray[i++];
     }
 
     while (j <= right) {
-        addCopyAnimation(j, k, animations, auxiliaryArray, resetAnimations)
+        addCopyAnimation(j, k, animations, auxiliaryArray)
         mainArray[k++] = auxiliaryArray[j++];
     }
 
 
-    animations.push(...resetAnimations)
+
 }

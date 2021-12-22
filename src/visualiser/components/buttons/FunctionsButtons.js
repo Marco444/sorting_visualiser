@@ -1,10 +1,9 @@
 import {SortButton} from "./SortButton";
 import {ShuffleButton} from "./ShuffleButton";
-import {ResetButton} from "./ResetButton";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import React from "react";
 
-export const FunctionsButtons = ({isBusy, sortButtonClicked, shuffleButtonClicked, stopAnimation}) => {
+export const FunctionsButtons = ({isBusy, sortButtonClicked, shuffleButtonClicked}) => {
     return (
         <ButtonGroup
             orientation="vertical"

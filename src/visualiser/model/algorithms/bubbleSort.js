@@ -2,7 +2,6 @@ import {addSwapAnimation, getSortedAnimations,} from "../animations/AnimationsEn
 
 export default function getBubbleSortAnimations(array) {
     let setAnimations = []
-    let resetAnimations = []
 
     if (array.length === 0) return setAnimations;
 
@@ -10,7 +9,7 @@ export default function getBubbleSortAnimations(array) {
         for (let j = 0; j < array.length; j++) {
             if (array[j] > array[j + 1]) {
 
-                addSwapAnimation(j, j + 1, setAnimations, resetAnimations)
+                addSwapAnimation(j, j + 1, setAnimations)
 
                 //SWAP ELEMENTS
                 const aux = array[j];
@@ -19,9 +18,8 @@ export default function getBubbleSortAnimations(array) {
             }
         }
 
-        setAnimations.push(...resetAnimations)
     }
 
 
-    return setAnimations.concat(resetAnimations).concat(getSortedAnimations(array))
+    return setAnimations.concat(getSortedAnimations(array))
 }
