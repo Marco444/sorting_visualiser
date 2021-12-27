@@ -2,7 +2,7 @@ import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineR
 import Button from "@mui/material/Button";
 import React from "react";
 
-export const SortButton = ({isBusy, sortButtonClicked}) => {
+export const SortButton = ({isBusy, sortButtonClicked, height}) => {
    return (
        <Button key="one" disabled={isBusy}
                sx={{
@@ -11,6 +11,7 @@ export const SortButton = ({isBusy, sortButtonClicked}) => {
                    fontWeight: 'bold',
                    paddingLeft: 2,
                    paddingTop: 1,
+                   height: height
                }} onClick={sortButtonClicked}> SORT
            <PlayCircleOutlineRoundedIcon sx={{paddingLeft: 1}}/>
        </Button>

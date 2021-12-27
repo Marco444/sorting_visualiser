@@ -1,5 +1,5 @@
 {
-  "homepage": "https://marco444.github.io",
+  "homepage": "https://marco444.github.io/sortingvisualiser",
   "name": "sorting_visualiser",
   "version": "0.1.0",
   "private": true,
@@ -15,6 +15,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-overlays": "^5.1.1",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "reactjs-popup": "^2.0.5",
     "web-vitals": "^1.1.2"

@@ -3,12 +3,12 @@ import SpeedRoundedIcon from "@mui/icons-material/SpeedRounded";
 import React from "react";
 
 export const SliderAnimationSpeed = ({maxSliderSpeedValue, minSliderSpeedValue, defaultSpeedValue,
-                                         sliderWidth, handleSpeedSlider, isBusy}) => {
+                                         sliderWidth, handleSpeedSlider, isBusy, height, marginTop}) => {
     return (
         <Stack sx={{
             backgroundColor: 'rgba(57,92,183,0.98)',
             marginTop: 1,
-            color: "white"
+            color: "white",
         }}>
             <Stack>
                 <Typography id="animation-slider" sx={{

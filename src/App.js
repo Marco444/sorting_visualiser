@@ -15,9 +15,9 @@ import {InformationBox} from "./visualiser/components/InformationBox";
 import {SortingAlgorithm} from "./visualiser/model/algorithms/SortingAlgorithm";
 import {SliderNumberBars} from "./visualiser/components/sliders/SliderNumberBars";
 
-//tried nesting setstate in same call to update number of bars a
-//and the sorting same time
-export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, height}) => {
+
+export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, height, stackLeftTopMargin,
+                    functionButtonsHeight, algorithmBoxHeight, slidersHeight}) => {
 
     const ANIMATION_SPEED_SLIDER_MAX = 200;
     const animationSpeed = 1
@@ -29,7 +29,7 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
 
     const [isBusy, setBusy] = useState(false)
     const [array, setArray] = useState(newShuffledArray(numberOfBars, 0, barsLength))
-    const [sortingAlgorithm, setSortingAlgorithm] = useState(SortingAlgorithm.mergeSort)
+    const [sortingAlgorithm, setSortingAlgorithm] = useState(SortingAlgorithm.none)
 
     const defaultNumberOfBars = numberOfBars
     const defaultAnimationSpeed = sortingAnimationSpeed
@@ -37,7 +37,8 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
 
     const sortButtonClicked = () => {
         setTimeout( () => {
-            setBusy(true)
+            if(sortingAlgorithm !== SortingAlgorithm.none)
+                setBusy(true)
             applyAnimations(sortingAlgorithm.getAnimations(array), sortingAnimationSpeed)
         }, 100)
     }
@@ -62,11 +63,6 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
     useEffect(() => applyAnimations(getShuffleAnimations(array), animationSpeed), [array])
     useEffect(() => applyAnimations(getAlgorithmSelectionAnimation(array), animationSpeed), [sortingAlgorithm])
 
-    const handleStopAnimation = () => {
-        window.location.reload();
-    }
-
-
     const applyAnimations = (animations, speed) => {
 
         for (let index = 0; index < animations.length; index++) {
@@ -83,7 +79,7 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
                sx={{
                    display: 'flex',
                    '& > *': {
-                       m: 5,
+                       m: 2,
                    }
                }}>
 
@@ -94,21 +90,20 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
             }}>
 
                 <FunctionsButtons isBusy={isBusy} shuffleButtonClicked={shuffleButtonClicked.bind(this)}
-                                  sortButtonClicked={sortButtonClicked.bind(this)}
-                                  stopAnimation={handleStopAnimation.bind(this)}/>
+                                  sortButtonClicked={sortButtonClicked.bind(this)} height={functionButtonsHeight}/>
 
-                <AlgorithmSelector isBusy={isBusy} stackWidth={stackWidth}
+                <AlgorithmSelector isBusy={isBusy} stackWidth={stackWidth} height={algorithmBoxHeight}
                                    bubbleSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.bubbleSort); setBusy(true)}}
                                    radixSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.radixSort); setBusy(true)}}
                                    mergeSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.mergeSort); setBusy(true)}}
                                    quickSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.quickSort); setBusy(true)}}/>
 
-
                 <SliderAnimationSpeed isBusy={isBusy} sliderWidth={stackWidth}
                                       handleSpeedSlider={handleSpeedSlider.bind(this)}
                                       maxSliderSpeedValue={ANIMATION_SPEED_SLIDER_MAX}
                                       minSliderSpeedValue={ANIMATION_SPEED_SLIDER_MAX / 2}
-                                      defaultSpeedValue={ANIMATION_SPEED_SLIDER_MAX - defaultAnimationSpeed}/>
+                                      defaultSpeedValue={ANIMATION_SPEED_SLIDER_MAX - defaultAnimationSpeed}
+                                      height={slidersHeight} marginTop={functionButtonsHeight + algorithmBoxHeight}/>
 
                 <SliderNumberBars isBusy={isBusy} sliderWidth={stackWidth}
                                   handlerBarsNumberSlider={handleBarsNumberSlider.bind(this)}

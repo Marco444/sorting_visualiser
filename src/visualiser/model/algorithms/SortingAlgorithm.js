@@ -24,17 +24,20 @@ const quickSortInfo =
   `     It works by recursively partitioning the list of elements based upon a pivot element and then sorting
        each subarray recursively by putting the pivot in the correct order. O(n*logn) time complexity `
 
+const bubbleSortLink =  'https://en.wikipedia.org/wiki/Bubble_sort'
+
 export class SortingAlgorithm {
 
     static mergeSort = new SortingAlgorithm(mergeSortInfo, (array) => getMergeSortAnimations(array))
     static quickSort = new SortingAlgorithm(quickSortInfo, (array) => getQuickSortAnimations(array))
     static radixSort = new SortingAlgorithm(radixSortInfo, (array) => getRadixSortAnimations(array))
-    static bubbleSort = new SortingAlgorithm(bubbleSortInfo, (array) => getBubbleSortAnimations(array))
+    static bubbleSort = new SortingAlgorithm(bubbleSortInfo, (array) => getBubbleSortAnimations(array), bubbleSortLink)
+    static none = new SortingAlgorithm("", () => ([]), '')
 
-
-    constructor(text, animations) {
+    constructor(text, animations, link) {
         this.text = text
         this.animations = animations
+        this.link = link
     }
 
     getAnimations(array) {

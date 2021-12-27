@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import ShuffleOnRoundedIcon from "@mui/icons-material/ShuffleOnRounded";
 import React from "react";
 
-export const ShuffleButton = ({isBusy, shuffleButtonClicked}) => {
+export const ShuffleButton = ({isBusy, shuffleButtonClicked, height}) => {
     return (
         <Button key="two" disabled={isBusy}
                 sx={{
@@ -11,6 +11,7 @@ export const ShuffleButton = ({isBusy, shuffleButtonClicked}) => {
                     fontWeight: 'bold',
                     paddingLeft: 2,
                     paddingTop: 1,
+                    height: height
                 }} onClick={shuffleButtonClicked}> SHUFFLE
             <ShuffleOnRoundedIcon sx={{paddingLeft: 1}} />
         </Button>

@@ -1,43 +1,76 @@
-import {addCopyAnimation} from "../animations/AnimationsEngine";
+import {
+    addCopyAnimation,
+    Animation,
+    AnimationType,
+    CopyAnimation,
+    getSortedAnimations
+} from "../animations/AnimationsEngine";
 
 export default function getRadixSortAnimations(array) {
     let animations = []
 
-    let maximum = Math.max(...array)
+    let idx1, idx2, idx3, len1, len2, radix, radixKey;
+    let radices = {}, buckets = {}, num, curr;
+    let currLen, radixStr, currBucket;
 
-    // Do counting sort for every digit.
-    for (let exp = 1; Math.floor(maximum / exp) > 0; exp *= 10)
-        countSort(array, exp, animations);
+    len1 = array.length;
+    len2 = 10;  // radix sort uses ten buckets
 
-    return animations
-}
-
-
-function countSort(array, exp, animations)
-{
-    const output = new Array(array.length); // output array
-    const count = []
-
-    // Store count of occurrences in count[]
-    for (let i = 0; i < array.length; i++)
-        count[Math.floor(array[i] / exp) % 10]++;
-
-    // Change count[i] so that count[i] now contains
-    // actual position of this digit in output[]
-    for (let i = 1; i < 10; i++)
-        count[i] += count[i - 1];
-
-    // Build the output array
-    for (let i = array.length - 1; i >= 0; i--) {
-        output[count[Math.floor(array[i] / exp) % 10] - 1] = array[i];
-        count[Math.floor(array[i] / exp) % 10]--;
+    // find the relevant radices to process for efficiency
+    for (idx1 = 0;idx1 < len1;idx1++) {
+        radices[array[idx1].toString().length] = 0;
     }
 
-    // Copy the output array to arr[], so that arr[] now
-    // contains sorted numbers according to current digit
-    for (let i = 0; i < array.length; i++) {
-        addCopyAnimation(i, i, animations, output)
-        array[i] = output[i];
-    }
+    // loop for each radix. For each radix we put all the items
+    // in buckets, and then pull them out of the buckets.
+    for (radix in radices) {
+        // put each array item in a bucket based on its radix value
+        len1 = array.length;
+        for (idx1 = 0;idx1 < len1;idx1++) {
+            curr = array[idx1];
+            // item length is used to find its current radix value
+            currLen = curr.toString().length;
+            // only put the item in a radix bucket if the item
+            // key is as long as the radix
+            if (currLen >= radix) {
+                // radix starts from beginning of key, so need to
+                // adjust to get redix values from start of stringified key
+                radixKey = curr.toString()[currLen - radix];
+                // create the bucket if it does not already exist
+                if (!buckets.hasOwnProperty(radixKey)) {
+                    buckets[radixKey] = [];
+                }
+                // put the array value in the bucket
+                buckets[radixKey].push(curr);
+            } else {
+                if (!buckets.hasOwnProperty('0')) {
+                    buckets['0'] = [];
+                }
+                buckets['0'].push(curr);
+            }
+        }
 
+        // for current radix, items are in buckets, now put them
+        // back in the array based on their buckets
+        // this index moves us through the array as we insert items
+        idx1 = 0;
+
+        // go through all the buckets
+        for (idx2 = 0;idx2 < len2;idx2++) {
+            // only process buckets with items
+            if (buckets[idx2] != null) {
+                currBucket = buckets[idx2];
+                // insert all bucket items into array
+                len1 = currBucket.length;
+                for (idx3 = 0;idx3 < len1;idx3++) {
+                    animations.push(new Animation(AnimationType.SliderSelection, idx1, idx1))
+                    animations.push(new Animation(new CopyAnimation(currBucket[idx3]), idx1))
+                    array[idx1++] = currBucket[idx3];
+                }
+            }
+        }
+        buckets = {};
+    }
+    
+    return animations.concat(...getSortedAnimations(array))
 }

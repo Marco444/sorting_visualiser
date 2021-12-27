@@ -10,7 +10,7 @@ class SwapAnimation {
     }
 }
 
-class CopyAnimation {
+export class CopyAnimation {
 
     constructor(newWidth) {
         this.newWidth = newWidth
@@ -27,7 +27,7 @@ const algorithmSelectedColor = "#ffb4a1"
 const selectedColor = "#21e892"
 const sortedColor = "#e73068"
 
-class AnimationType {
+export class AnimationType {
 
     static AlgorithmSelection = new AnimationType(800, algorithmSelectedColor, defaultBarColor)
     static SliderSelection = new AnimationType(800, selectedColor, defaultBarColor)
@@ -52,7 +52,7 @@ class AnimationType {
     }
 }
 
-class Animation {
+export class Animation {
 
     constructor(type, i, j) {
         this.type = type;

@@ -1,17 +1,42 @@
-import { useWindowSize} from "react-use";
+import {useWindowSize} from "react-use";
 import {useState} from "react";
-import {WelcomeGuide} from "./visualiser/components/modals/Welcome";
+import {WelcomeGuide} from "./visualiser/components/tutorial/Welcome";
 import {App} from "./App";
+import {Tutorial} from "./visualiser/components/tutorial/Tutorial";
+
+/**
+ * This component is centered mainly on managing the UI dimensions positions of the elements
+ * (it separates this functionality so that App, which actually provides functionality
+ * is not cluttered with all this information)
+ **/
 
 export const MainApp = () => {
     const {height, width} = useWindowSize();
-    const [welcomeShow, closeWelcome] = useState(true);
 
-    return(
+    /////Tutorial
+    const [welcome, showWelcome] = useState(true);
+    const [startTutorial, setStartTutorial] = useState(false)
+
+
+    /////Dimensions
+    const stackWidth = width * 0.15
+    const functionButtonsHeight = 65
+
+    return (
         <>
-            <WelcomeGuide display={welcomeShow} close={() => closeWelcome( () => false)} width={width} height={height}/>
+            <WelcomeGuide startTutorial={() => {
+                setStartTutorial(true);
+                showWelcome(false)
+            }}
+                          close={() => showWelcome(() => false)}
+                          display={welcome} width={width} height={height}/>
+
+            <Tutorial start={startTutorial}
+                      stackWidth={stackWidth} functionButtonsHeight={functionButtonsHeight}/>
+
             <App width={width} height={height} canvasHeight={height * 0.8} canvasWidth={width * 0.8}
-                 stackWidth={width * 0.15} stackHeight={height * 0.8}/>
+                 stackWidth={stackWidth} stackHeight={height * 0.8}
+                 functionButtonsHeight={functionButtonsHeight}/>
         </>
     )
 
