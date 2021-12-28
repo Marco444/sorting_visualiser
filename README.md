@@ -5,5 +5,3 @@ This project was designed to visualise some sorting algorithms in an intuitive a
 
 ##### You can check it out live on https://marco444.github.io/
 
-## Project Structure:
-
