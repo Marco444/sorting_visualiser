@@ -16,8 +16,8 @@ import {SortingAlgorithm} from "./visualiser/model/algorithms/SortingAlgorithm";
 import {SliderNumberBars} from "./visualiser/components/sliders/SliderNumberBars";
 
 
-export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, height, stackLeftTopMargin,
-                    functionButtonsHeight, algorithmBoxHeight, slidersHeight}) => {
+export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, height,
+                    functionButtonsHeight, algorithmBoxHeight, slidersHeight, isMobileDevice}) => {
 
     const ANIMATION_SPEED_SLIDER_MAX = 200;
     const animationSpeed = 1
@@ -75,7 +75,7 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
     }
 
     return (
-        <Stack direction="row"
+        <Stack direction={isMobileDevice ? "column" : "row" }
                sx={{
                    display: 'flex',
                    '& > *': {

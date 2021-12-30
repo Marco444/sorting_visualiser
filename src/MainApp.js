@@ -17,15 +17,18 @@ export const MainApp = () => {
     const [welcome, showWelcome] = useState(true);
     const [startTutorial, setStartTutorial] = useState(false)
 
+    ///Responsive constant
+    const mobileWidth = 1000
+    const isMobileDevice = mobileWidth > width
 
     /////Dimensions
-    const stackWidth = width * 0.15
+    const stackWidth = width < mobileWidth ? width * 0.8 : width * 0.15
     const functionButtonsHeight = 65
 
     return (
         <>
             <WelcomeGuide startTutorial={() => {
-                setStartTutorial(true);
+                setStartTutorial(isMobileDevice);
                 showWelcome(false)
             }}
                           close={() => showWelcome(() => false)}
@@ -36,7 +39,7 @@ export const MainApp = () => {
 
             <App width={width} height={height} canvasHeight={height * 0.8} canvasWidth={width * 0.8}
                  stackWidth={stackWidth} stackHeight={height * 0.8}
-                 functionButtonsHeight={functionButtonsHeight}/>
+                 functionButtonsHeight={functionButtonsHeight} isMobileDevice={isMobileDevice}/>
         </>
     )
 
