@@ -1,6 +1,6 @@
 import {useWindowSize} from "react-use";
 import {useState} from "react";
-import {WelcomeGuide} from "./visualiser/components/tutorial/Welcome";
+import {WelcomeGuide} from "./visualiser/components/Welcome";
 import {App} from "./App";
 import {Tutorial} from "./visualiser/components/tutorial/Tutorial";
 

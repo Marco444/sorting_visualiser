@@ -5,6 +5,10 @@ import {
     getSortedAnimations
 } from "../animations/AnimationsEngine";
 
+/**
+ * Information used in the components part once an algorithm is selected
+ * **/
+
 export const radixSortInfo =
     `   Radix Sort works by  creating and distributing elements into buckets according to their radix.
         For elements with more than one significant digit, this bucketing process is repeated for each digit,
@@ -18,6 +22,10 @@ export const radixSortComplexity =
         This means that for most numbers  we have linear complexity, the lower bound for any sorting algorithm! (we need
         to at least traverse every element to know how to order them) .
     `
+/**
+ * Function same form for all the algorithms it takes an array and returns an array with the animations
+ * corresponding to sorting the input array with the sorting algorithm
+ * **/
 
 export default function getRadixSortAnimations(array) {
     let animations = []

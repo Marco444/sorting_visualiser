@@ -4,6 +4,10 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import React from "react";
 import {Box, Modal, Slide} from "@mui/material";
 
+/**
+ * Designed to hold functionality of sort and shuffle
+ * **/
+
 export const FunctionsButtons = ({isBusy, sortButtonClicked, shuffleButtonClicked, height}) => {
 
     return (

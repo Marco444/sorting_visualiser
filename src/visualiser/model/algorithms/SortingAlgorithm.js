@@ -7,6 +7,12 @@ import getInsertionSortAnimations, {insertionSortComplexity, insertionSortInfo} 
 import getHeapSortAnimations, {heapSortComplexity, heapSortInfo} from "./heapSort";
 
 
+/**
+ * Designed to encapsulate all the different sorting algorithms into a kind of enum (came from coding a lot in java),
+ * such that we can directly update the current algorithm in App.js to one of these enum values, and call methods from it
+ * and get different functionality for the same method calls given the current algorithm selected
+ * **/
+
 export class SortingAlgorithm {
 
     static mergeSort = new SortingAlgorithm(mergeSortInfo, mergeSortComplexity, (array) => getMergeSortAnimations(array))
@@ -30,8 +36,3 @@ export class SortingAlgorithm {
 
 }
 
-export function swap(i, j, array) {
-    let temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-}

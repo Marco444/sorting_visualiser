@@ -4,6 +4,12 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import {SortingAlgorithm} from "../model/algorithms/SortingAlgorithm";
 
 
+/**
+ * Designed to display the information of each the sorting algorithm selected, to achieve this it
+ * listens to when the algorithm is changed, and updates its internal state to display the modal
+ * with the corresponding algorithms information
+ * **/
+
 export const InformationBox = ({algorithm, width}) => {
 
     const [slide, setSlide] = useState(false)
@@ -11,7 +17,6 @@ export const InformationBox = ({algorithm, width}) => {
     useEffect(() => {
         setSlide(algorithm !== SortingAlgorithm.none)
     }, [algorithm])
-
 
 
     return (

@@ -5,6 +5,9 @@ import {SlidersExplanation} from "./SlidersExplanation";
 import {InformationBoxExplanation} from "./InformationBoxExplanation";
 
 
+/**
+ * We define the style of each composing element of the tutorial
+ * **/
 export const buttonStyleTutorial = {
     color: '#fff',
     margin: 2,
@@ -25,6 +28,14 @@ export const explanationBoxStyle = {
     width: 470,
     "margin-left": 280
 }
+
+
+/**
+ * Designed to encapsulate the functionality of the tutorial, it maintains an array with the order the
+ * tutorial explains all the UI components, and each corresponding tutorial component diplays itself
+ * when the current counter points to him. On close each tutorial component calls the next which updates
+ * the current step of the tutorial.
+ * **/
 
 export const Tutorial = ({start, stackWidth, functionButtonsHeight, stackTopLeftMargin}) => {
 

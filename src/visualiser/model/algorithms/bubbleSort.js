@@ -1,5 +1,9 @@
 import {addSwapAnimation, getSortedAnimations,} from "../animations/AnimationsEngine";
-import {swap} from "./SortingAlgorithm";
+import {swap} from "../utils";
+
+/**
+ * Information used in the components part once an algorithm is selected
+ * **/
 
 export const bubbleSortInfo =
     `   Bubble sort works by traversing all the elements the amount of
@@ -17,6 +21,10 @@ export const bubbleSortComplexity =
         while its space complexity is constant as its an in-place algorithm.
     `
 
+/**
+ * Function same form for all the algorithms it takes an array and returns an array with the animations
+ * corresponding to sorting the input array with the sorting algorithm
+ * **/
 
 export default function getBubbleSortAnimations(array) {
     let setAnimations = []

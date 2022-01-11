@@ -1,4 +1,11 @@
 
+/****
+ ***
+ * This file was designed with the intent of storing the two types of aninmations we use in the sorting algorithms
+ * (swapping and copying), and a ColorAnimation used for the ux experience.
+ ***
+ ****/
+
 class SwapAnimation {
     static begin = new SwapAnimation();
     static end;
@@ -66,7 +73,10 @@ export class Animation {
 
 }
 
-
+/*
+* Takes an array of elements and a type of animation and returns
+* a list of applying that animation to every element in the array
+* */
 function animateBarsWith(array, animation) {
     let animationsSet = []
 
@@ -75,6 +85,10 @@ function animateBarsWith(array, animation) {
 
     return animationsSet
 }
+
+///////////////////////////////////////////////////////
+//// Functions to provide different animations ////////
+///////////////////////////////////////////////////////
 
 export function getSortedAnimations(array) {
    return animateBarsWith(array, AnimationType.Sorted)

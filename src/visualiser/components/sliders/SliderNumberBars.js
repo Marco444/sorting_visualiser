@@ -2,6 +2,11 @@ import {Box, Slider, Stack} from "@mui/material";
 import FormatLineSpacingIcon from "@mui/icons-material/FormatLineSpacing";
 import React from "react";
 
+/**
+ * Designed to allow the user to modify the number of the bars to be ordered
+ * **/
+
+
 export const SliderNumberBars = ({maxNumberBars, minNumberBars, defaultNumberBars,
                                  sliderWidth, isBusy, handlerBarsNumberSlider}) => {
    return (

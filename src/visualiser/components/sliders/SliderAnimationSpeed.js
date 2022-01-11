@@ -2,6 +2,11 @@ import {Slider, Stack, Typography} from "@mui/material";
 import SpeedRoundedIcon from "@mui/icons-material/SpeedRounded";
 import React from "react";
 
+/**
+ * Designed to allow the user to modify the speed of the animations as they happen when the
+ * sort button is clicked
+ * **/
+
 export const SliderAnimationSpeed = ({maxSliderSpeedValue, minSliderSpeedValue, defaultSpeedValue,
                                          sliderWidth, handleSpeedSlider, isBusy, height, marginTop}) => {
     return (

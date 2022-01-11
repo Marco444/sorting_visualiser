@@ -10,6 +10,10 @@ const buttonStyle = {
     },
 }
 
+/**
+ * Designed as a modal to allow the user to select whether they want a tutorial of how the app works
+ * **/
+
 export const WelcomeGuide = ({display, close, width, height, startTutorial}) => {
     const a = 1
     const widthBox = width / 4

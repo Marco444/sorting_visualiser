@@ -1,4 +1,8 @@
 
+/**
+ * Information used in the components part once an algorithm is selected
+ * **/
+
 export const heapSortInfo =
     `
         Heap Sort works quite similarly to selection sort. It keeps an unsorted and a sorted region of the array,
@@ -13,6 +17,11 @@ export const heapSortComplexity =
         In terms of time complexity its best, average and worst case are all O(n*logn), while its space complexity is constant. 
        
     `
+
+/**
+ * Function same form for all the algorithms it takes an array and returns an array with the animations
+ * corresponding to sorting the input array with the sorting algorithm
+ * **/
 
 export default function getHeapSortAnimations(array) {
     return [];

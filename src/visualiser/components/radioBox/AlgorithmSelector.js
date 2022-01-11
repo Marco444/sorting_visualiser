@@ -2,6 +2,10 @@ import {FormControl, FormControlLabel, Radio, RadioGroup, Stack, Typography} fro
 import SortRoundedIcon from "@mui/icons-material/SortRounded";
 import React from "react";
 
+/**
+ * Design to allow the user to select which algorithm they want to see visualised,
+ * when clicked each buttons calls the respective callback defined in App.js
+ * **/
 
 export const AlgorithmSelector = ({
                                       stackWidth, mergeSortButtonClicked, bubbleSortButtonClicked,
@@ -52,8 +56,8 @@ export const AlgorithmSelector = ({
                     <FormControlLabel sx={labelSX} value="bubbleSort" control={<Radio/>} label="Bubble Sort"
                                       onChange={bubbleSortButtonClicked} disabled={isBusy}/>
 
-                    <FormControlLabel sx={labelSX} value="heapSort" control={<Radio/>} label="Heap Sort"
-                                      onChange={heapSortButtonClicked} disabled={isBusy}/>
+                    {/*<FormControlLabel sx={labelSX} value="heapSort" control={<Radio/>} label="Heap Sort"
+                                      onChange={heapSortButtonClicked} disabled={isBusy}/>*/}
 
                     <FormControlLabel sx={labelSX} value="mergeSort" control={<Radio/>} label="Merge Sort"
                                       onChange={mergeSortButtonClicked} disabled={isBusy}/>
