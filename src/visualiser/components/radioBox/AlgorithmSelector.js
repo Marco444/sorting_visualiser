@@ -3,7 +3,8 @@ import SortRoundedIcon from "@mui/icons-material/SortRounded";
 import React from "react";
 
 export const AlgorithmSelector = ({stackWidth, mergeSortButtonClicked, bubbleSortButtonClicked,
-                                  isBusy, quickSortButtonClicked, radixSortButtonClicked}) => {
+                                  isBusy, quickSortButtonClicked, radixSortButtonClicked,
+                                  selectionSortButtonClicked, insertionSortButtonClicked, heapSortButtonClicked}) => {
     return (
 
         <FormControl sx={{
@@ -34,11 +35,21 @@ export const AlgorithmSelector = ({stackWidth, mergeSortButtonClicked, bubbleSor
                     <SortRoundedIcon sx={{paddingLeft: 1}}/>
                 </Typography>
                 <Stack sx={{fontWeight: 'bold'}}>
-                    <FormControlLabel value="insertionSort" control={<Radio/>} label="Merge Sort"
-                                      onChange={mergeSortButtonClicked} disabled={isBusy} />
+                    <FormControlLabel value="selectionSort" control={<Radio/>} label="Selection Sort"
+                                      onChange={selectionSortButtonClicked} disabled={isBusy}>
+                    </FormControlLabel>
 
-                    <FormControlLabel value="mergeSort" control={<Radio/>}  label="Bubble Sort"
+                    <FormControlLabel value="insertionSort" control={<Radio/>} label="Insertion Sort"
+                                      onChange={insertionSortButtonClicked} disabled={isBusy} />
+
+                    <FormControlLabel value="bubbleSort" control={<Radio/>}  label="Bubble Sort"
                                       onChange={bubbleSortButtonClicked} disabled={isBusy}/>
+
+                    <FormControlLabel value="heapSort" control={<Radio/>}  label="Heap Sort"
+                                      onChange={heapSortButtonClicked} disabled={isBusy}/>
+
+                    <FormControlLabel value="mergeSort" control={<Radio/>} label="Merge Sort"
+                                      onChange={mergeSortButtonClicked} disabled={isBusy} />
 
                     <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"
                                       onChange={quickSortButtonClicked} disabled={isBusy}/>

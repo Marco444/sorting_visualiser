@@ -1,47 +1,37 @@
-import getMergeSortAnimations from "./mergeSort";
-import getQuickSortAnimations from "./quickSort";
-import getRadixSortAnimations from "./radixSort";
-import getBubbleSortAnimations from "./bubbleSort";
+import getMergeSortAnimations, {mergeSortComplexity, mergeSortInfo} from "./mergeSort";
+import getQuickSortAnimations, {quickSortComplexity, quickSortInfo} from "./quickSort";
+import getRadixSortAnimations, {radixSortComplexity, radixSortInfo} from "./radixSort";
+import getBubbleSortAnimations, {bubbleSortComplexity, bubbleSortInfo} from "./bubbleSort";
+import getSelectionSortAnimations, {selectionSortComplexity, selectionSortInfo} from "./selectionSort";
+import getInsertionSortAnimations, {insertionSortComplexity, insertionSortInfo} from "./insertionSort";
+import getHeapSortAnimations, {heapSortComplexity, heapSortInfo} from "./heapSort";
 
-const bubbleSortInfo =
-    `   Bubble sort works by traversing all the elements the amount of
-        times being equal to the number of elements, and
-        whenever two adyacent elements can be shifted in the
-        correct order, they are shifted. O(n^2) time complexity `
-
-const mergeSortInfo =
-   `    Merge Sort works by recursively dividing the list of elements in half
-    until it can't anymore. Then it merges all the subarrays in the corresponding
-     order until we dont have more subarrays to merge. O(n*logn) time complexity`
-
-const radixSortInfo =
-    `   It works by decomposing each element in digits and for every digit ordering
-     the elements upon it (without loosing order from previous digits). It is different
-      from the others as it doesn't soley compare elements when ordering them. As a result
-       it manages to have time complexity O(n) provided the range of numbers isnt crazy high (polynomial)`
-
-const quickSortInfo =
-  `     It works by recursively partitioning the list of elements based upon a pivot element and then sorting
-       each subarray recursively by putting the pivot in the correct order. O(n*logn) time complexity `
-
-const bubbleSortLink =  'https://en.wikipedia.org/wiki/Bubble_sort'
 
 export class SortingAlgorithm {
 
-    static mergeSort = new SortingAlgorithm(mergeSortInfo, (array) => getMergeSortAnimations(array))
-    static quickSort = new SortingAlgorithm(quickSortInfo, (array) => getQuickSortAnimations(array))
-    static radixSort = new SortingAlgorithm(radixSortInfo, (array) => getRadixSortAnimations(array))
-    static bubbleSort = new SortingAlgorithm(bubbleSortInfo, (array) => getBubbleSortAnimations(array), bubbleSortLink)
-    static none = new SortingAlgorithm("", () => ([]), '')
+    static mergeSort = new SortingAlgorithm(mergeSortInfo, mergeSortComplexity, (array) => getMergeSortAnimations(array))
+    static quickSort = new SortingAlgorithm(quickSortInfo, quickSortComplexity, (array) => getQuickSortAnimations(array))
+    static radixSort = new SortingAlgorithm(radixSortInfo, radixSortComplexity, (array) => getRadixSortAnimations(array))
+    static bubbleSort = new SortingAlgorithm(bubbleSortInfo, bubbleSortComplexity, (array) => getBubbleSortAnimations(array))
+    static selectionSort = new SortingAlgorithm(selectionSortInfo, selectionSortComplexity, (array) => getSelectionSortAnimations(array))
+    static insertionSort = new SortingAlgorithm(insertionSortInfo, insertionSortComplexity, (array) => getInsertionSortAnimations(array))
+    static heapSort = new SortingAlgorithm(heapSortInfo, heapSortComplexity, (array) => getHeapSortAnimations(array),)
+    static none = new SortingAlgorithm("", "", () => ([]),)
 
-    constructor(text, animations, link) {
+    constructor(text, complexity, animations) {
         this.text = text
         this.animations = animations
-        this.link = link
+        this.complexity = complexity
     }
 
     getAnimations(array) {
         return this.animations(array)
     }
 
+}
+
+export function swap(i, j, array) {
+    let temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
 }

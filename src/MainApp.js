@@ -27,10 +27,7 @@ export const MainApp = () => {
 
     return (
         <>
-            <WelcomeGuide startTutorial={() => {
-                setStartTutorial(isMobileDevice);
-                showWelcome(false)
-            }}
+            <WelcomeGuide startTutorial={() => {setStartTutorial(true); showWelcome(false)}}
                           close={() => showWelcome(() => false)}
                           display={welcome} width={width} height={height}/>
 

@@ -1,6 +1,20 @@
 import {addSwapAnimation} from "../animations/AnimationsEngine";
 import {getSortedAnimations} from "../animations/AnimationsEngine";
 
+export const quickSortInfo =
+    `     Quick Sort works by recursively partitioning the list of elements based upon a pivot element and then sorting
+       each subarray recursively by putting the pivot in the correct order. 
+       
+       It works similarly to Merge Sort because both are divide and conquer algorithms.Their differences being how they
+       divide into subproblems and how they merge.`
+
+export const quickSortComplexity =
+    `
+        In terms of time complexity its average case is O(n*logn), worst case is O(n^2), and best is O(n*logn), while
+        space complexity is at worst linear.
+    `
+
+
 export default function getQuickSortAnimations(array){
     let animations = []
 

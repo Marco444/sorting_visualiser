@@ -96,7 +96,10 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
                                    bubbleSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.bubbleSort); setBusy(true)}}
                                    radixSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.radixSort); setBusy(true)}}
                                    mergeSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.mergeSort); setBusy(true)}}
-                                   quickSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.quickSort); setBusy(true)}}/>
+                                   quickSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.quickSort); setBusy(true)}}
+                                   selectionSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.selectionSort); setBusy(true)}}
+                                   insertionSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.insertionSort); setBusy(true)}}
+                                   heapSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.heapSort); setBusy(true)}}/>
 
                 <SliderAnimationSpeed isBusy={isBusy} sliderWidth={stackWidth}
                                       handleSpeedSlider={handleSpeedSlider.bind(this)}
@@ -111,13 +114,11 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
                                   minNumberBars={canvasHeight * 0.5 / barsHeight}
                                   defaultNumberBars={defaultNumberOfBars}/>
 
-
-                <InformationBox algorithm={sortingAlgorithm} width={stackWidth}/>
-
             </Stack>
 
             <SortingVisualiser barsHeight={barsHeight} array={array}
                                width={width} height={height} canvasWidth={canvasWidth}/>
+            <InformationBox algorithm={sortingAlgorithm} width={stackWidth}/>
         </Stack>
 
     );

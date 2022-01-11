@@ -1,10 +1,20 @@
 import {
-    addCopyAnimation,
     Animation,
     AnimationType,
     CopyAnimation,
     getSortedAnimations
 } from "../animations/AnimationsEngine";
+
+export const radixSortInfo =
+    `   Radix Sort works by decomposing each element in digits, and for every digit ordering
+        the elements upon it (without loosing order from previous digits). It is different
+        from the other algorithms as it doesn't solely compare elements when ordering them. As a result
+        it manages to have time complexity O(n) provided the range of numbers isnt crazy high (polynomial)`
+
+export const radixSortComplexity =
+    `
+    
+    `
 
 export default function getRadixSortAnimations(array) {
     let animations = []
