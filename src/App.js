@@ -92,7 +92,7 @@ export const App = ({canvasHeight, canvasWidth, stackWidth, stackHeight, width, 
                 <FunctionsButtons isBusy={isBusy} shuffleButtonClicked={shuffleButtonClicked.bind(this)}
                                   sortButtonClicked={sortButtonClicked.bind(this)} height={functionButtonsHeight}/>
 
-                <AlgorithmSelector isBusy={isBusy} stackWidth={stackWidth} height={algorithmBoxHeight}
+                <AlgorithmSelector isBusy={isBusy} stackWidth={stackWidth} height={height}
                                    bubbleSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.bubbleSort); setBusy(true)}}
                                    radixSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.radixSort); setBusy(true)}}
                                    mergeSortButtonClicked={() => {setSortingAlgorithm(SortingAlgorithm.mergeSort); setBusy(true)}}

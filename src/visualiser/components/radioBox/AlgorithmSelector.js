@@ -2,9 +2,16 @@ import {FormControl, FormControlLabel, Radio, RadioGroup, Stack, Typography} fro
 import SortRoundedIcon from "@mui/icons-material/SortRounded";
 import React from "react";
 
-export const AlgorithmSelector = ({stackWidth, mergeSortButtonClicked, bubbleSortButtonClicked,
-                                  isBusy, quickSortButtonClicked, radixSortButtonClicked,
-                                  selectionSortButtonClicked, insertionSortButtonClicked, heapSortButtonClicked}) => {
+
+export const AlgorithmSelector = ({
+                                      stackWidth, mergeSortButtonClicked, bubbleSortButtonClicked,
+                                      isBusy, quickSortButtonClicked, radixSortButtonClicked,
+                                      selectionSortButtonClicked, insertionSortButtonClicked, heapSortButtonClicked,
+                                  }) => {
+    const labelSX = {
+        padding: 1
+    }
+
     return (
 
         <FormControl sx={{
@@ -35,26 +42,26 @@ export const AlgorithmSelector = ({stackWidth, mergeSortButtonClicked, bubbleSor
                     <SortRoundedIcon sx={{paddingLeft: 1}}/>
                 </Typography>
                 <Stack sx={{fontWeight: 'bold'}}>
-                    <FormControlLabel value="selectionSort" control={<Radio/>} label="Selection Sort"
+                    <FormControlLabel sx={labelSX} value="selectionSort" control={<Radio/>} label="Selection Sort"
                                       onChange={selectionSortButtonClicked} disabled={isBusy}>
                     </FormControlLabel>
 
-                    <FormControlLabel value="insertionSort" control={<Radio/>} label="Insertion Sort"
-                                      onChange={insertionSortButtonClicked} disabled={isBusy} />
+                    <FormControlLabel sx={labelSX} value="insertionSort" control={<Radio/>} label="Insertion Sort"
+                                      onChange={insertionSortButtonClicked} disabled={isBusy}/>
 
-                    <FormControlLabel value="bubbleSort" control={<Radio/>}  label="Bubble Sort"
+                    <FormControlLabel sx={labelSX} value="bubbleSort" control={<Radio/>} label="Bubble Sort"
                                       onChange={bubbleSortButtonClicked} disabled={isBusy}/>
 
-                    <FormControlLabel value="heapSort" control={<Radio/>}  label="Heap Sort"
+                    <FormControlLabel sx={labelSX} value="heapSort" control={<Radio/>} label="Heap Sort"
                                       onChange={heapSortButtonClicked} disabled={isBusy}/>
 
-                    <FormControlLabel value="mergeSort" control={<Radio/>} label="Merge Sort"
-                                      onChange={mergeSortButtonClicked} disabled={isBusy} />
+                    <FormControlLabel sx={labelSX} value="mergeSort" control={<Radio/>} label="Merge Sort"
+                                      onChange={mergeSortButtonClicked} disabled={isBusy}/>
 
-                    <FormControlLabel value="quickSort" control={<Radio/>} label="Quick Sort"
+                    <FormControlLabel sx={labelSX} value="quickSort" control={<Radio/>} label="Quick Sort"
                                       onChange={quickSortButtonClicked} disabled={isBusy}/>
 
-                    <FormControlLabel value="radixSort" control={<Radio/>} label="Radix Sort"
+                    <FormControlLabel sx={labelSX} value="radixSort" control={<Radio/>} label="Radix Sort"
                                       onChange={radixSortButtonClicked} disabled={isBusy}/>
                 </Stack>
             </RadioGroup>

@@ -2,7 +2,7 @@ import {Modal, Stack, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import {buttonStyleTutorial, explanationBoxStyle, textStyleTutorial} from "./Tutorial";
 
-export const InformationBoxExplanation = ({display, close, padding, height, marginTop}) => {
+export const InformationBoxExplanation = ({display, close, width}) => {
     return (
 
         <Modal
@@ -10,15 +10,20 @@ export const InformationBoxExplanation = ({display, close, padding, height, marg
             onClose={close}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
-            <Stack direction="row" style={explanationBoxStyle}
-                   sx={{
-                       marginTop: marginTop / 1.9
-                   }}>
-                <Typography sx={textStyleTutorial}>
+            <Stack direction="column" style={{
+                marginTop: 20,
+                backgroundColor: "#ff8181",
+                width: width,
+                float: "right",
+                marginRight: 40,
+                color: "white",
+                padding: 17,
+            }}>
+                <Typography sx={{fontWeight: 'bold'}}>
                     Here we have a small explanation of how the algorithm works, as well
-                    its average time complexity
+                    its complexity
                 </Typography>
-                <Button sx={buttonStyleTutorial}  onClick={close}> LET'S PLAY </Button>
+                <Button sx={buttonStyleTutorial} onClick={close}> LET'S PLAY </Button>
             </Stack>
         </Modal>
     )

@@ -31,8 +31,7 @@ export const MainApp = () => {
                           close={() => showWelcome(() => false)}
                           display={welcome} width={width} height={height}/>
 
-            <Tutorial start={startTutorial}
-                      stackWidth={stackWidth} functionButtonsHeight={functionButtonsHeight}/>
+            <Tutorial start={startTutorial} stackWidth={stackWidth} functionButtonsHeight={functionButtonsHeight}/>
 
             <App width={width} height={height} canvasHeight={height * 0.8} canvasWidth={width * 0.8}
                  stackWidth={stackWidth} stackHeight={height * 0.8}

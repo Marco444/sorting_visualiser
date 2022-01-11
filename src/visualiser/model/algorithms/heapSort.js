@@ -1,12 +1,16 @@
 
 export const heapSortInfo =
     `
-        Heap Sort work
+        Heap Sort works quite similarly to selection sort. It keeps an unsorted and a sorted region of the array,
+        and inserts every element from the unsorted region into their correct position in the sorted region. It differs
+        from selection sort in that it doesn't traverse all elements to know where it should be, but it pops it from
+        a heap to quickly find the element. Because of this its time complexity comes to be the same as the lower bound
+        for comparison-based sorts.
     `
 
 export const heapSortComplexity =
     `
-        Regarding time complexity we have O(n*log n) time in best, worst and average cases; and O(1) space. 
+        In terms of time complexity its best, average and worst case are all O(n*logn), while its space complexity is constant. 
        
     `
 

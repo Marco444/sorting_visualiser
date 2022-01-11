@@ -53,9 +53,8 @@ export const Tutorial = ({start, stackWidth, functionButtonsHeight, stackTopLeft
                                 paddingLeft={stackWidth}
                                 height={functionButtonsHeight} marginTop={functionButtonsHeight * 5}/>
 
-            <InformationBoxExplanation height={functionButtonsHeight}
-                                       display={tutorialSteps[current] === "informationBox"} close={next}
-                                       padding={stackWidth} marginTop={functionButtonsHeight * 2}/>
+            <InformationBoxExplanation width={stackWidth}
+                                       display={tutorialSteps[current] === "informationBox"} close={next}/>
         </>
     );
 }

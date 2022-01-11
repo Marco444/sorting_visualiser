@@ -4,12 +4,17 @@ import {swap} from "./SortingAlgorithm";
 export const bubbleSortInfo =
     `   Bubble sort works by traversing all the elements the amount of
         times being equal to the number of elements, and
-        whenever two adyacent elements can be shifted in the
-        correct order, they are shifted. O(n^2) time complexity `
+        whenever two adjacent elements can be shifted in the
+        correct order, they are shifted.
+        
+        Its applications often involve places where memory is scarce
+        and the amount of elements isn't extremely big. Although within
+        cuadratic algorithms it's usually outperformed by insertion sort`
 
 export const bubbleSortComplexity =
     `
-    
+        In terms of time complexity its average, worst and best case are all O(n^2),
+        while its space complexity is constant as its an in-place algorithm.
     `
 
 

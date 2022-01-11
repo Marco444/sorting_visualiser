@@ -11,11 +11,11 @@ export const SlidersExplanation = ({display, close, padding, height, marginTop})
             aria-describedby="modal-modal-description">
             <Stack direction="row" style={explanationBoxStyle}
                    sx={{
-                       marginTop: marginTop / 7
+                       marginTop: marginTop / 4.5
                    }}>
                 <Typography sx={textStyleTutorial}>
                     These are the sliders to either control the animation speed or the number
-                    of bars (bubble sort reccommended fewest bars greatest speed)
+                    of bars (bubble sort recommended fewest bars greatest speed)
                 </Typography>
                 <Button sx={buttonStyleTutorial}  onClick={close}> NEXT </Button>
             </Stack>

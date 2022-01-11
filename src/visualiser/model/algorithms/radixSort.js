@@ -6,14 +6,17 @@ import {
 } from "../animations/AnimationsEngine";
 
 export const radixSortInfo =
-    `   Radix Sort works by decomposing each element in digits, and for every digit ordering
-        the elements upon it (without loosing order from previous digits). It is different
-        from the other algorithms as it doesn't solely compare elements when ordering them. As a result
-        it manages to have time complexity O(n) provided the range of numbers isnt crazy high (polynomial)`
+    `   Radix Sort works by  creating and distributing elements into buckets according to their radix.
+        For elements with more than one significant digit, this bucketing process is repeated for each digit,
+        while preserving the ordering of the prior step, until all digits have been considered.
+    `
 
 export const radixSortComplexity =
     `
-    
+        In terms of time complexity its O(n) with the requirement that they are in the range 1 to n^c with c being a constant
+        
+        This means that for most numbers  we have linear complexity, the lower bound for any sorting algorithm! (we need
+        to at least traverse every element to know how to order them) .
     `
 
 export default function getRadixSortAnimations(array) {
