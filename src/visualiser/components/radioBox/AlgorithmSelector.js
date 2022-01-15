@@ -56,8 +56,8 @@ export const AlgorithmSelector = ({
                     <FormControlLabel sx={labelSX} value="bubbleSort" control={<Radio/>} label="Bubble Sort"
                                       onChange={bubbleSortButtonClicked} disabled={isBusy}/>
 
-                    {/*<FormControlLabel sx={labelSX} value="heapSort" control={<Radio/>} label="Heap Sort"
-                                      onChange={heapSortButtonClicked} disabled={isBusy}/>*/}
+                    <FormControlLabel sx={labelSX} value="heapSort" control={<Radio/>} label="Heap Sort"
+                                      onChange={heapSortButtonClicked} disabled={isBusy}/>
 
                     <FormControlLabel sx={labelSX} value="mergeSort" control={<Radio/>} label="Merge Sort"
                                       onChange={mergeSortButtonClicked} disabled={isBusy}/>

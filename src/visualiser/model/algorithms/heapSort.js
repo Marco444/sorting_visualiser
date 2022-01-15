@@ -1,7 +1,9 @@
-
 /**
  * Information used in the components part once an algorithm is selected
  * **/
+import {addSwapAnimation} from "../animations/AnimationsEngine";
+import {swap} from "../utils";
+
 
 export const heapSortInfo =
     `
@@ -24,5 +26,45 @@ export const heapSortComplexity =
  * **/
 
 export default function getHeapSortAnimations(array) {
-    return [];
+    let animations = [];
+
+    buildMaxHeap(array, animations);
+
+    for(let lastNotSwapped = array.length - 1; lastNotSwapped > 0; lastNotSwapped--) {
+
+        //we push the biggest to the last element not yet swap
+        swap(0, lastNotSwapped, array);
+        addSwapAnimation(0, lastNotSwapped, animations);
+
+        siftDown(0, lastNotSwapped - 1, array, animations);
+    }
+
+    return animations;
+}
+
+function buildMaxHeap(array, animations) {
+    const firstParent = Math.floor((array.length - 2) / 2);
+    for(let current = firstParent; current >= 0; current--)
+        siftDown(current, array.length - 1, array, animations);
+}
+
+function siftDown(current, end, heap, animations) {
+    let childOne = current * 2 + 1;
+
+    while(childOne <= end) {
+        const childTwo = current * 2 + 2 <= end ? current * 2 + 2 : -1;
+        let toSwap;
+
+        if(childTwo !== -1 && heap[childTwo] > heap[childOne]) toSwap = childTwo;
+        else toSwap = childOne;
+
+        if(heap[toSwap] > heap[current]) {
+            swap(current, toSwap, heap);
+            addSwapAnimation(current, toSwap, animations);
+            current = toSwap;
+            childOne = current * 2 + 1;
+        } else {
+            return;
+        }
+    }
 }
