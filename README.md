@@ -5,7 +5,7 @@ This project was designed to visualise some sorting algorithms in an intuitive a
 
 ## Project Structure:
 
-'''
+```
 
 .
 ├── App.js      //React component of sorting application in itself
@@ -51,4 +51,4 @@ This project was designed to visualise some sorting algorithms in an intuitive a
         │   └── AnimationsEngine.js
         └── utils.js
 
-'''
+```
